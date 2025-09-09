@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autres Éditions - Aquaculture For All</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fbff;
+      color: #012433;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem;
+    }
+    .section {
+      padding: 7rem 2rem 4rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #00A6D6;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .edition-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .edition-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .edition-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .edition-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #014455;
+    }
+    .edition-card p {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
+    }
+    .footer {
+      background: #001A26;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All" />
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="index.html#hero">Accueil</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="index.html#projets">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Autres Éditions</h1>
+      <p>Retrouvez ici des publications complémentaires éditées par nos partenaires, ou issues de projets communs avec des institutions nationales ou internationales.</p>
+      <div class="edition-grid">
+        <div class="edition-card">
+          <img src="other1.jpg" alt="Édition externe 1" />
+          <h3>Manuel FAO sur la pisciculture en Afrique</h3>
+          <p>Un manuel complet sur les systèmes de production durable, édité avec le soutien technique de la FAO.</p>
+        </div>
+        <div class="edition-card">
+          <img src="other2.jpg" alt="Édition externe 2" />
+          <h3>Guide de gestion communautaire des ressources halieutiques</h3>
+          <p>Outil développé avec les ONG locales pour une pêche responsable et équitable dans les milieux lagunaires et fluviaux.</p>
+        </div>
+        <div class="edition-card">
+          <img src="other3.jpg" alt="Édition externe 3" />
+          <h3>Recueil d’expériences d’aquaculture inclusive</h3>
+          <p>Histoires vraies et témoignages de femmes leaders et jeunes pisciculteurs en Côte d’Ivoire et au Sénégal.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>

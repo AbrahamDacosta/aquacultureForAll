@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aquaculture For All</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem;
+    }
+  </style>
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script defer src="./js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div id="teamModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Conseil d’administration</h2>
+      <label for="roleFilter">Filtrer par rôle :</label>
+      <select id="roleFilter">
+        <option value="all">Tous</option>
+        <option value="Président">Président</option>
+        <option value="Vice-presidente">Vice-presidente</option>
+        <option value="Directeur Technique">Directeur Technique</option>
+        <option value="Secrétaire Administratif AFA">Secrétaire Administratif</option>
+      </select>
+      <ul class="board-list">
+        <li data-role="Président">
+          <img src="./assets/images/AFA_President.png"><div><strong>Dr. Da Costa k. Sebastino</strong><br><small>Président</small></div>
+        </li>
+        <li data-role="Vice-presidente">
+          <img src="./assets/images/AFA_Vice-President.png"><div><strong>Mme. N'gnaore Edwige</strong><br><small>Vice-presidente</small></div>
+        </li>
+        <li data-role="Directeur Technique">
+          <img src="./assets/images/abraham4.jpeg"><div><strong>M. Da Costa k. Abraham</strong><br><small>Directeur Technique</small></div>
+        </li>
+        <li data-role="Tresorier General">
+          <img src="./assets/images/Trésorier Général AFA.png"><div><strong>M. N’Dri Kouassi Vivien</strong><br><small>Trésorier Général AFA</small></div>
+        </li>
+        <li data-role="Conseiller Juridique">
+          <img src="./assets/images/Conseiller juridique AFA.png"><div><strong>M. N’gnaoré Kouadio Antoine</strong><br><small>Conseiller juridique AFA</small></div>
+        </li>
+        <li data-role="Secrétaire Administratif AFA">
+          <img src="./assets/images/Secrétaire Administratif AFA.png"><div><strong>Mme N’guessan Amoin Léocadie</strong><br><small>Secrétaire Administratif AFA</small></div>
+        </li>
+        <li data-role="Conseiller AFA chargé de la sensibilisation et de la formation">
+          <img src="./assets/images/Conseiller AFA chargé de la sensibilisation et de la formation.png"><div><strong>M. Bankolé Guy Alain</strong><br><small>Conseiller AFA chargé de la sensibilisation et de la formation</small></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="joinModal" class="modal">
+    <div class="modal-content">
+      <span class="close-join">&times;</span>
+      <h2>Rejoindre l’équipe</h2>
+      <form action="https://formspree.io/f/xanealpd" method="POST" class="join-form">
+        <input type="text" name="name" placeholder="Votre nom complet" required />
+        <input type="email" name="email" placeholder="Votre email" required />
+        <select name="poste" required>
+          <option value="">Poste souhaité</option>
+          <option value="Chargé de communication">Chargé de communication</option>
+          <option value="Responsable terrain">Responsable terrain</option>
+          <option value="Formateur">Formateur</option>
+          <option value="Volontaire">Volontaire</option>
+        </select>
+        <textarea name="message" placeholder="Pourquoi souhaitez-vous nous rejoindre ?" rows="4" required></textarea>
+        <button type="submit">Envoyer ma candidature</button>
+        <p id="formSuccess" style="display:none; color:#00C0E2; font-weight:bold; margin-top:1rem;">Merci pour votre candidature !</p>
+      </form>
+    </div>
+  </div>
+  
+<header class="header">
+  <div class="logo">
+    <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      <li class="has-dropdown"><button>Accueil</button>
+        <ul class="dropdown">
+          <li><a href="mot-du-president.html">Le mot du Président</a></li>
+          <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="notre-mission.html">Notre mission</a></li>
+          <li><a href="nos-objectifs.html">Nos objectifs</a></li>
+          <li><a href="notre-organisation.html">Notre organisation</a></li>
+          <li><a href="notre-devise.html">Notre devise</a></li>
+        </ul>
+      </li>
+      <li class="has-dropdown"><button>Activité</button>
+        <ul class="dropdown">
+          <li><a href="domaines-activites.html">Domaines d’activités</a></li>
+          <li><a href="actions-afa.html">Actions de l’ONG AFA</a></li>
+          <li><a href="cibles-afa.html">Cibles</a></li>
+          <li><a href="milieux-etude.html">Milieux d’étude</a></li>
+          <li><a href="partenariats-afa.html">Partenariats</a></li>
+          <li><a href="conferences-seminaires-ateliers.html">Conférences, séminaires et ateliers</a></li>
+          <li><a href="recherche-developpement.html">Recherche / Développement</a></li>
+          <li><a href="sessions-formation.html">Sessions de formation AFA</a></li>
+          <li><a href="conseil-montage-projets.html">Conseil et Montage de projets</a></li>
+          <li><a href="production.html">Production</a></li>
+          <li><a href="videos.html">Vidéos</a></li>
+        </ul>
+      </li>
+      
+      <li class="has-dropdown"><button>Infos utiles</button>
+        <ul class="dropdown">
+          <li><a href="infos-aquaculture.html">Aquaculture</a></li>
+          <li><a href="infos-peche.html">Pêche</a></li>
+        </ul>
+      </li>
+      
+      <li class="has-dropdown"><button>Forum</button>
+        <ul class="dropdown">
+          <li><a href="forum-afa.html">Forum</a></li>
+       
+        </ul>
+      <li class="has-dropdown"><button>Kits</button>
+        <ul class="dropdown">
+          <li><a href="kits-aquaculture.html">Aquaculture</a></li>
+          <li><a href="kits-peche.html">Pêche</a></li>
+        </ul>
+      </li>
+
+      <li class="has-dropdown"><button>Galeries</button>
+     
+        <li class="has-dropdown"><button>Ecitions</button>
+        <ul class="dropdown">
+          <li><a href="editions-afa.html">Editions AFA</a></li>
+          <li><a href="autres-editions.html">Autres publications</a></li>
+        </ul>
+      </li>
+      
+        <li class="has-dropdown"><button>Donations</button>
+          <ul class="dropdown">
+            <li><a href="donation.html">Donation</a></li>
+         
+          </ul>
+
+          <li class="has-dropdown"><button>Contacts</button>
+            <ul class="dropdown">
+              <li><a href="contact-form-ocean-advanced.html">Contacts</a></li>
+           
+            </ul>
+    </ul>
+  </nav>
+</header>
+
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="reveal">Une aquaculture durable<br/> et accessible à tous</h1>
+      <p class="reveal">Promouvoir l’autosuffisance en poissons et accompagner les femmes dans l’élevage.</p>
+      <a href="#mission" class="cta reveal">Découvrir notre mission</a>
+    </div>
+    <video class="hero-video-bg" autoplay muted loop playsinline>
+      <source src="./assets/videos/hero-bg.mp4" type="video/mp4" />
+    </video>
+  </section>
+
+  <section class="section mission">
+    <div class="container">
+      <div class="text reveal">
+        <h2>Nous développons des solutions aquacoles innovantes</h2>
+        <p>Notre ONG œuvre pour un monde où chacun peut produire du poisson localement et durablement. Nous accompagnons les femmes, formons les jeunes et expérimentons des technologies adaptées au climat.</p>
+      </div>
+      <div class="image reveal">
+        <img src="./assets/images/team-afa.jpg" alt="Aquaculture Illustration">
+      
+  </section>
+
+  <section class="section problem">
+    <div class="container">
+      <div class="text reveal">
+        <h2>Un enjeu vital pour la sécurité alimentaire</h2>
+        <p>Des millions de personnes souffrent de la dépendance aux importations de poisson. Notre planète fait face à un déséquilibre alimentaire majeur, amplifié par le changement climatique et l’inégalité d’accès aux ressources aquatiques durables.</p>
+      </div>
+      <div class="image reveal">
+        <img src="./assets/images/flyer1.png" alt="Problème Aquatique">
+   
+  </section>
+
+  <section class="section objectifs">
+    <div class="container">
+      <div class="text reveal">
+        <h2>Nos objectifs à l'horizon 2030</h2>
+        <ul>
+          <li>🚺 Autonomiser 10 000 femmes piscicultrices</li>
+          <li>🐟 Réduire de 40% la dépendance aux importations de poisson</li>
+          <li>💧 Mettre en place 500 unités de surveillance de qualité d’eau</li>
+        </ul>
+      </div>
+      <div class="image reveal">
+        <img src="./assets/images/flyer2.png" alt="Objectifs Visuels">
+    
+  </section>
+
+
+  <section id="projets" class="section projets">
+    <div class="container">
+      <h2>Nos Projets</h2>
+  
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="en-cours">En cours</button>
+        <button class="filter-btn" data-filter="passe">Passé</button>
+        <button class="filter-btn" data-filter="a-venir">À venir</button>
+      </div>
+  
+      <div class="project-grid">
+        <div class="project-card" data-category="en-cours">
+          <img src="./assets/images/project1.jpg" alt="Projet 1">
+          <h3>Femmes en Aquaculture</h3>
+          <p>150 femmes formées à la pisciculture</p>
+        </div>
+        <div class="project-card" data-category="a-venir">
+          <img src="./assets/images/project2.jpg" alt="Projet 2">
+          <h3>Tech'Aqua</h3>
+          <p>Déploiement de capteurs d'eau connectés</p>
+        </div>
+        <div class="project-card" data-category="passe">
+          <img src="./assets/images/project3.jpg" alt="Projet 3">
+          <h3>Bassins écoles</h3>
+          <p>10 lycées agricoles équipés de bassins</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container">
+      <div class="text reveal">
+        <h2>Ils témoignent</h2>
+        <p>Découvrez comment notre programme a transformé la vie de nombreuses familles.</p>
+      </div>
+      <div class="testimonial-cards">
+        <div class="card reveal">
+          <p>“Grâce à la formation reçue, j’ai lancé mon propre bassin piscicole. Aujourd’hui, je vends mes poissons au marché local.”</p>
+          <span>– Aïssata, Bouaké</span>
+        </div>
+        <div class="card reveal">
+          <p>“Le suivi de qualité de l’eau est désormais automatisé. Nos rendements ont augmenté de 30%.”</p>
+          <span>– Jean, Korhogo</span>
+        </div>
+        <div class="card reveal">
+          <p>“Ce projet a changé la perception de la pisciculture dans notre communauté.”</p>
+          <span>– Marie, Yamoussoukro</span>
+        </div>
+     
+  </section>
+
+
+
+  <section id="equipe" class="section equipe">
+    <div class="container">
+      <h2>Notre Équipe</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="./assets/images/AFA_President.png" alt="Dr. DA COSTA K. SEBASTINO">
+          <h3>Dr. Da Costa K. Sebastino</h3>
+          <p>Président</p>
+        </div>
+        <div class="team-member">
+          <img src="./assets/images/AFA_VICE-president.png" alt="N'gnaore Edwige">
+          <h3>Mme. N'gnaore Edwige</h3>
+          <p>Vice-presidente</p>
+        </div>
+      </div>
+      <div class="cta-container">
+        <a href="#" class="cta" id="showBoardBtn">Voir tout le conseil d’administration</a>
+        <a href="#" class="cta" id="joinTeamBtn">Rejoindre l’équipe</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2>Nous contacter</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p><strong>Email :</strong> contact@aquacultureforall.org</p>
+          <p><strong>Téléphone :</strong> +225 07 47 05 10 61</p>
+          <p><strong>Adresse :</strong> Abidjan, Côte d’Ivoire</p>
+        </div>
+        <div class="contact-map">
+          <iframe
+            src="https://maps.google.com/maps?q=abidjan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="250"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+  
+  
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+      <div class="social-links">
+        <a href="#"><img src="./assets/images/facebook.svg" alt="Facebook" /></a>
+        <a href="#"><img src="./assets/images/twitter.svg" alt="Twitter" /></a>
+        <a href="#"><img src="./assets/images/linkedin.svg" alt="LinkedIn" /></a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Gère les sous-menus avec boutons
+    document.querySelectorAll('.has-dropdown > button').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const parent = e.currentTarget.parentElement;
+  
+        // Fermer les autres
+        document.querySelectorAll('.has-dropdown').forEach(el => {
+          if (el !== parent) el.classList.remove('open');
+        });
+  
+        // Toggle menu actuel
+        parent.classList.toggle('open');
+        e.stopPropagation();
+      });
+    });
+  
+    // Ferme tout si clic en dehors
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('open'));
+    });
+  </script>
+  
+  
+</body>
+</html>
+
+
+
+

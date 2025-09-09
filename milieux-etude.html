@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milieux d’étude - Aquaculture For All</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fbff;
+      color: #012433;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem;
+    }
+    .section {
+      padding: 7rem 2rem 4rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #00A6D6;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    ul.milieux-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul.milieux-list li {
+      margin-bottom: 1.2rem;
+      padding-left: 2rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    ul.milieux-list li::before {
+      content: "🌊";
+      position: absolute;
+      left: 0;
+      font-size: 1.1rem;
+    }
+    .footer {
+      background: #001A26;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="index.html#hero">Accueil</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="index.html#projets">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Milieux d’étude</h1>
+      <p>L’ONG AFA concentre ses actions de recherche, de formation et de production sur des milieux aquatiques variés, représentatifs des réalités écologiques locales :</p>
+      <ul class="milieux-list">
+        <li>Bassins fluviaux et lacustres</li>
+        <li>Plans d’eau lagunaires et maritimes</li>
+        <li>Étangs aquacoles</li>
+        <li>Unités de production aquacole en circuit fermé</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>

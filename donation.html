@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faire un don - Aquaculture For All</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f9fc;
+      color: #012433;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      padding: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .section {
+      padding: 7rem 2rem 4rem;
+    }
+    .donations {
+      background: linear-gradient(to bottom right, #e0f7ff, #ffffff);
+      text-align: center;
+    }
+    .donate-form {
+      max-width: 500px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+    }
+    .donate-form label {
+      font-weight: bold;
+    }
+    .donate-form input {
+      padding: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .donate-btn {
+      padding: 1rem 2rem;
+      background: #00C0E2;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+    .donate-btn:hover {
+      background: #019bb3;
+    }
+    .footer {
+      background: #001A26;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Aquaculture For All</div>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="index.html#hero">Accueil</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="index.html#projets">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section donations">
+    <div class="container">
+      <h2>Faire un don</h2>
+      <p>Votre soutien permet à notre ONG d'impacter durablement les communautés rurales.</p>
+
+      <form method="POST" action="https://checkout.cinetpay.com/payment/c223ffd7eee67c7b258e2835b14f762d699c78d84478e66027463a10a83728f064ed34a1d51f2ad07df343d0bfdb0da9e6830439064e72" class="donate-form">
+        <input type="hidden" name="apikey" value="12912847765bc0db748fdd44.40081707" />
+        <input type="hidden" name="site_id" value="5869879" />
+        <input type="hidden" name="transaction_id" value="" />
+        <input type="hidden" name="description" value="Donation Aquaculture For All" />
+        <input type="hidden" name="currency" value="XOF" />
+        <input type="hidden" name="return_url" value="" />
+        <input type="hidden" name="notify_url" value="https://votresite.com/notify.php" />
+
+        <label>Votre nom :</label>
+        <input type="text" name="customer_name" required />
+
+        <label>Montant du don (en FCFA) :</label>
+        <input type="number" name="amount" min="100" required />
+
+        <button type="submit" class="donate-btn" href="/merci.html">Payer avec CinetPay</button>
+      </form>
+
+      <p style="font-style: italic; color: #555; max-width: 600px; margin: 2rem auto 0;">Merci pour votre générosité 🙏</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('.donate-form');
+      const transactionInput = form.querySelector('input[name="transaction_id"]');
+      const timestamp = new Date().getTime();
+      transactionInput.value = `afa_don_${timestamp}`;
+    });
+  </script>
+</body>
+</html>

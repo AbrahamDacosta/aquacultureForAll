@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forum - Aquaculture For All</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fbff;
+      color: #012433;
+    }
+    .header {
+      background: #012433;
+      color: white;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo img {
+      height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem;
+    }
+    .section {
+      padding: 7rem 2rem 4rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #00A6D6;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .intro {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .forum-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .forum-form h2 {
+      color: #014455;
+      margin-bottom: 1rem;
+    }
+    .forum-form textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .forum-form button {
+      background: #00A6D6;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .forum-form button:hover {
+      background: #008fbf;
+    }
+    .footer {
+      background: #001A26;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All" />
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="index.html#hero">Accueil</a></li>
+        <li><a href="index.html#mission">Mission</a></li>
+        <li><a href="index.html#equipe">Équipe</a></li>
+        <li><a href="index.html#projets">Projets</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Forum Pêche & Aquaculture</h1>
+      <div class="intro">
+        <p>Bienvenue sur le forum participatif dédié à la <strong>pêche et à l’aquaculture</strong>. Cet espace est ouvert à tous les membres et partenaires de l’ONG AFA souhaitant partager des nouvelles, des problématiques régionales ou encore des suggestions concernant l’évolution de leurs secteurs d’activités.</p>
+        <p><strong>Objectif :</strong> stimuler le dialogue communautaire, la veille sectorielle et l’échange d’expériences entre les professionnels du domaine.</p>
+      </div>
+
+      <div class="forum-form">
+        <h2>💬 Partagez une actualité ou un message</h2>
+        <textarea placeholder="Décrivez ici votre situation, un événement marquant ou une information utile à la communauté..."></textarea>
+        <button>Publier</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+  </footer>
+</body>
+</html>
