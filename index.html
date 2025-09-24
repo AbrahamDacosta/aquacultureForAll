@@ -1,378 +1,2061 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aquaculture For All</title>
+  <title>Aquaculture For All - ONG d'Aquaculture Durable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .logo img {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
-    }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
     }
-    .navbar a {
-      color: white;
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation avec dropdowns */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
       text-decoration: none;
-      padding: 0.8rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .nav-link::before,
+    .dropdown-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before,
+    .dropdown-btn:hover::before,
+    .has-dropdown.open .dropdown-btn::before {
+      width: 100%;
+    }
+
+    .nav-link:hover,
+    .dropdown-btn:hover,
+    .has-dropdown.open .dropdown-btn {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Dropdowns modernes */
+    .has-dropdown {
+      position: relative;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      background: white;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(11, 126, 200, 0.1);
+      min-width: 250px;
+      border-radius: 20px;
+      padding: 15px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 1001;
+      list-style: none;
+      box-shadow: var(--shadow-heavy);
+      overflow: hidden;
+    }
+
+    .dropdown::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 1px solid rgba(11, 126, 200, 0.1);
+      border-bottom: none;
+      border-right: none;
+      transform: rotate(45deg);
+      border-radius: 4px 0 0 0;
+    }
+
+    .has-dropdown:hover .dropdown,
+    .has-dropdown.open .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown li {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 12px 25px;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.95rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border-radius: 0;
+    }
+
+    .dropdown a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(11, 126, 200, 0.1), rgba(0, 212, 230, 0.05));
+      transition: left 0.3s ease;
+    }
+
+    .dropdown a:hover::before {
+      left: 0;
+    }
+
+    .dropdown a:hover {
+      color: var(--primary-blue);
+      transform: translateX(10px);
+      background: rgba(11, 126, 200, 0.05);
+    }
+
+    .dropdown a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+    }
+
+    .dropdown a:hover::after {
+      width: 100%;
+    }
+
+    /* CTA Button */
+    .cta-nav {
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-light);
+    }
+
+    .cta-nav:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(11, 126, 200, 0.9) 0%, rgba(0, 212, 230, 0.8) 100%);
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      color: white;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* Floating Elements */
+    .floating-stats {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      color: white;
+      min-width: 150px;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Mission Section */
+    .mission {
+      padding: 8rem 0;
+      background: var(--light-blue);
+      position: relative;
+    }
+
+    .mission::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(135deg, rgba(11, 126, 200, 0.9) 0%, rgba(0, 212, 230, 0.8) 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .mission-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .mission-content p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .mission-features {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .mission-image {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .mission-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .mission-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Impact Section */
+    .impact {
+      padding: 8rem 0;
+      background: white;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .impact-card {
+      background: linear-gradient(135deg, white 0%, var(--light-blue) 100%);
+      padding: 3rem 2rem;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .impact-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(11, 126, 200, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .impact-card:hover::before {
+      opacity: 1;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .impact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-1);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .impact-number {
+      font-size: 3rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 8rem 0;
+      background: var(--light-blue);
+    }
+
+    .projects-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: white;
+      color: var(--text-dark);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-light);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--gradient-1);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .project-image {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.1);
+    }
+
+    .project-status {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .project-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .project-progress {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .project-link {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      color: var(--accent-aqua);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 8rem 0;
+      background: white;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+      padding: 2.5rem;
+      border-radius: 25px;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem;
+      left: 2rem;
+      font-size: 4rem;
+      color: var(--primary-blue);
+      opacity: 0.3;
+      font-family: serif;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .author-info h4 {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .author-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Team Section */
+    .team {
+      padding: 8rem 0;
+      background: var(--light-blue);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 25px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      overflow: hidden;
+      border: 4px solid var(--primary-blue);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .team-role {
+      color: var(--primary-blue);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .team-bio {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 8rem 0;
+      background: white;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 4rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      background: var(--gradient-1);
+      color: white;
+      padding: 3rem;
+      border-radius: 25px;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .contact-form {
+      background: var(--light-blue);
+      padding: 3rem;
+      border-radius: 25px;
+      box-shadow: var(--shadow-light);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid rgba(11, 126, 200, 0.2);
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(11, 126, 200, 0.1);
+    }
+
+    .submit-btn {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .floating-stats {
+        position: static;
+        transform: none;
+        margin-top: 3rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* Mobile Menu avec dropdowns */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        flex-direction: column;
+        padding: 2rem 0;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        border-top: 1px solid rgba(11, 126, 200, 0.1);
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav-item {
+        width: 100%;
+        border-bottom: 1px solid rgba(11, 126, 200, 0.05);
+      }
+
+      .nav-link,
+      .dropdown-btn {
+        width: 100%;
+        text-align: left;
+        padding: 1rem 2rem;
+        border-radius: 0;
+        font-size: 16px;
+      }
+
+      .dropdown {
+        position: static;
+        opacity: 0;
+        visibility: hidden;
+        transform: none;
+        box-shadow: none;
+        background: rgba(11, 126, 200, 0.02);
+        backdrop-filter: none;
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .dropdown::before {
+        display: none;
+      }
+
+      .has-dropdown.open .dropdown {
+        opacity: 1;
+        visibility: visible;
+        display: block;
+        max-height: 500px;
+        padding: 10px 0;
+      }
+
+      .dropdown a {
+        padding: 10px 3rem;
+        font-size: 14px;
+        background: none;
+      }
+
+      .dropdown a:hover {
+        background: rgba(11, 126, 200, 0.1);
+        transform: translateX(5px);
+      }
+
+      .cta-nav {
+        margin-top: 1rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        display: block;
+        text-align: center;
+      }
+    }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .floating-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .section-container {
+        padding: 0 1rem;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects-grid,
+      .testimonials-grid,
+      .team-grid,
+      .impact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+    }
+
+    /* Utility Classes */
+    .hidden {
+      display: none !important;
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 3rem;
+      border-radius: 25px;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .close {
+      position: absolute;
+      right: 2rem;
+      top: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+    }
+
+    .close:hover {
+      color: var(--primary-blue);
     }
   </style>
-  <link rel="stylesheet" href="./css/styles.css" />
-  <script defer src="./js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="./assets/images/AFA.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </div>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Accueil</button>
+            <ul class="dropdown">
+              <li><a href="mot-du-president.html">Le mot du Président</a></li>
+              <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+              <li><a href="#mission">Notre mission</a></li>
+              <li><a href="nos-objectifs.html">Nos objectifs</a></li>
+              <li><a href="notre-organisation.html">Notre organisation</a></li>
+              <li><a href="notre-devise.html">Notre devise</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Activité</button>
+            <ul class="dropdown">
+              <li><a href="domaines-activites.html">Domaines d'activités</a></li>
+              <li><a href="actions-afa.html">Actions de l'ONG AFA</a></li>
+              <li><a href="cibles-afa.html">Cibles</a></li>
+              <li><a href="milieux-etude.html">Milieux d'étude</a></li>
+              <li><a href="partenariats-afa.html">Partenariats</a></li>
+              <li><a href="conferences-seminaires-ateliers.html">Conférences, séminaires et ateliers</a></li>
+              <li><a href="recherche-developpement.html">Recherche / Développement</a></li>
+              <li><a href="sessions-formation.html">Sessions de formation AFA</a></li>
+              <li><a href="conseil-montage-projets.html">Conseil et Montage de projets</a></li>
+              <li><a href="production.html">Production</a></li>
+              <li><a href="videos.html">Vidéos</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Infos utiles</button>
+            <ul class="dropdown">
+              <li><a href="infos-aquaculture.html">Aquaculture</a></li>
+              <li><a href="infos-peche.html">Pêche</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Forum</button>
+            <ul class="dropdown">
+              <li><a href="forum-afa.html">Forum</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Kits</button>
+            <ul class="dropdown">
+              <li><a href="kits-aquaculture.html">Aquaculture</a></li>
+              <li><a href="kits-peche.html">Pêche</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item"><a href="galeries.html" class="nav-link">Galeries</a></li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Editions</button>
+            <ul class="dropdown">
+              <li><a href="editions-afa.html">Editions AFA</a></li>
+              <li><a href="autres-editions.html">Autres publications</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Donations</button>
+            <ul class="dropdown">
+              <li><a href="donation.html">Donation</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-dropdown">
+            <button class="nav-link dropdown-btn">Contacts</button>
+            <ul class="dropdown">
+              <li><a href="#contact">Contacts</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-item"><a href="#donation" class="cta-nav">Faire un don</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="accueil">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="./assets/videos/hero-bg.mp4" type="video/mp4">
+    </video>
+    
+    <div class="hero-container">
+      <div class="hero-content animate-on-scroll">
+        <div class="hero-badge">🌊 ONG d'Aquaculture Durable</div>
+        <h1>Une aquaculture durable et accessible à tous</h1>
+        <p>Nous œuvrons pour un monde où chacun peut produire du poisson localement et durablement. Accompagnons ensemble les communautés vers l'autosuffisance alimentaire.</p>
+        
+        <div class="hero-buttons">
+          <a href="#mission" class="btn-primary">Découvrir notre mission</a>
+          <a href="#projets" class="btn-secondary">Nos projets</a>
+        </div>
+      </div>
+      
+      <div class="floating-stats animate-float">
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">10K+</span>
+          <span class="stat-label">Femmes formées</span>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">500</span>
+          <span class="stat-label">Unités créées</span>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">40%</span>
+          <span class="stat-label">Réduction imports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission" id="mission">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Notre Mission</div>
+        <h2 class="section-title">Développer des solutions aquacoles innovantes</h2>
+        <p class="section-subtitle">Notre ONG œuvre pour démocratiser l'aquaculture durable et accompagner les communautés vers l'autonomie alimentaire.</p>
+      </div>
+      
+      <div class="mission-grid">
+        <div class="mission-content animate-on-scroll">
+          <h3>Notre approche unique</h3>
+          <p>Nous combinons innovation technologique et savoir-faire traditionnel pour créer des solutions aquacoles adaptées aux défis locaux et au changement climatique.</p>
+          
+          <div class="mission-features">
+            <div class="feature-item">
+              <div class="feature-icon">🚺</div>
+              <div>
+                <h4>Autonomisation des femmes</h4>
+                <p>Formation et accompagnement de 10 000 femmes piscicultrices</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🔬</div>
+              <div>
+                <h4>Innovation technologique</h4>
+                <p>Développement de technologies adaptées au climat local</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🌱</div>
+              <div>
+                <h4>Durabilité environnementale</h4>
+                <p>Pratiques respectueuses de l'écosystème aquatique</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mission-image animate-on-scroll">
+          <img src="./assets/images/team-afa.jpg" alt="Équipe AFA en action">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="impact" id="impact">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Notre Impact</div>
+        <h2 class="section-title">Des résultats qui transforment les communautés</h2>
+        <p class="section-subtitle">Découvrez comment nos actions créent un impact durable sur la sécurité alimentaire et l'autonomisation des femmes.</p>
+      </div>
+      
+      <div class="impact-grid">
+        <div class="impact-card animate-on-scroll">
+          <div class="impact-icon">👥</div>
+          <div class="impact-number">10,000+</div>
+          <div class="impact-text">Femmes autonomisées dans l'aquaculture</div>
+        </div>
+        <div class="impact-card animate-on-scroll">
+          <div class="impact-icon">🏭</div>
+          <div class="impact-number">500</div>
+          <div class="impact-text">Unités de surveillance qualité d'eau</div>
+        </div>
+        <div class="impact-card animate-on-scroll">
+          <div class="impact-icon">📉</div>
+          <div class="impact-number">40%</div>
+          <div class="impact-text">Réduction dépendance importations</div>
+        </div>
+        <div class="impact-card animate-on-scroll">
+          <div class="impact-icon">🎓</div>
+          <div class="impact-number">150</div>
+          <div class="impact-text">Femmes formées cette année</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="projets">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Nos Projets</div>
+        <h2 class="section-title">Projets qui changent des vies</h2>
+        <p class="section-subtitle">Découvrez nos initiatives innovantes qui transforment l'aquaculture en Côte d'Ivoire et en Afrique de l'Ouest.</p>
+      </div>
+      
+      <div class="projects-filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="en-cours">En cours</button>
+        <button class="filter-btn" data-filter="termine">Terminé</button>
+        <button class="filter-btn" data-filter="a-venir">À venir</button>
+      </div>
+      
+      <div class="projects-grid">
+        <div class="project-card animate-on-scroll" data-category="en-cours">
+          <div class="project-image">
+            <img src="./assets/images/project1.jpg" alt="Femmes en Aquaculture">
+            <div class="project-status">En cours</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Femmes en Aquaculture</h3>
+            <p class="project-description">Programme de formation et d'accompagnement de 150 femmes à la pisciculture moderne avec suivi personnalisé.</p>
+            <div class="project-meta">
+              <span class="project-progress">Progression: 75%</span>
+              <a href="#" class="project-link">En savoir plus →</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate-on-scroll" data-category="a-venir">
+          <div class="project-image">
+            <img src="./assets/images/project2.jpg" alt="Tech'Aqua">
+            <div class="project-status">À venir</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Tech'Aqua</h3>
+            <p class="project-description">Déploiement de capteurs d'eau connectés pour le monitoring en temps réel de la qualité de l'eau.</p>
+            <div class="project-meta">
+              <span class="project-progress">Lancement: Q2 2025</span>
+              <a href="#" class="project-link">En savoir plus →</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate-on-scroll" data-category="termine">
+          <div class="project-image">
+            <img src="./assets/images/project3.jpg" alt="Bassins écoles">
+            <div class="project-status">Terminé</div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Bassins écoles</h3>
+            <p class="project-description">Équipement de 10 lycées agricoles avec des bassins pédagogiques pour la formation des jeunes.</p>
+            <div class="project-meta">
+              <span class="project-progress">100% réalisé</span>
+              <a href="#" class="project-link">Voir résultats →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Témoignages</div>
+        <h2 class="section-title">Ils témoignent de notre impact</h2>
+        <p class="section-subtitle">Découvrez comment nos programmes transforment concrètement la vie des bénéficiaires.</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card animate-on-scroll">
+          <p class="testimonial-text">Grâce à la formation reçue, j'ai pu lancer mon propre bassin piscicole. Aujourd'hui, je vends mes poissons au marché local et je nourris ma famille. C'est un vrai changement de vie !</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div class="author-info">
+              <h4>Aïssata Koné</h4>
+              <p>Piscicultrice, Bouaké</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate-on-scroll">
+          <p class="testimonial-text">Le système de suivi de qualité de l'eau est révolutionnaire. Nos rendements ont augmenté de 30% depuis son installation. La technologie au service de l'aquaculture !</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">J</div>
+            <div class="author-info">
+              <h4>Jean-Baptiste Ouattara</h4>
+              <p>Responsable pisciculture, Korhogo</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card animate-on-scroll">
+          <p class="testimonial-text">Ce projet a complètement changé la perception de la pisciculture dans notre communauté. Les femmes sont maintenant respectées et économiquement indépendantes.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <h4>Marie Diabaté</h4>
+              <p>Leader communautaire, Yamoussoukro</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team" id="equipe">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Notre Équipe</div>
+        <h2 class="section-title">Une équipe passionnée et experte</h2>
+        <p class="section-subtitle">Rencontrez les experts qui rendent possible notre mission d'aquaculture durable.</p>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-card animate-on-scroll">
+          <div class="team-avatar">
+            <img src="./assets/images/AFA_President.png" alt="Dr. Da Costa K. Sebastino">
+          </div>
+          <h3 class="team-name">Dr. Da Costa K. Sebastino</h3>
+          <p class="team-role">Président & Fondateur</p>
+          <p class="team-bio">Expert en aquaculture avec plus de 15 ans d'expérience dans le développement durable.</p>
+        </div>
+        
+        <div class="team-card animate-on-scroll">
+          <div class="team-avatar">
+            <img src="./assets/images/AFA_Vice-President.png" alt="Mme. N'gnaore Edwige">
+          </div>
+          <h3 class="team-name">Mme. N'gnaore Edwige</h3>
+          <p class="team-role">Vice-Présidente</p>
+          <p class="team-bio">Spécialiste en autonomisation des femmes et développement communautaire.</p>
+        </div>
+        
+        <div class="team-card animate-on-scroll">
+          <div class="team-avatar">
+            <img src="./assets/images/abraham4.jpeg" alt="M. Da Costa K. Abraham">
+          </div>
+          <h3 class="team-name">M. Da Costa K. Abraham</h3>
+          <p class="team-role">Directeur Technique</p>
+          <p class="team-bio">Ingénieur aquacole spécialisé dans les technologies innovantes et durables.</p>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="#" class="btn-primary" id="showTeamModal">Voir toute l'équipe</a>
+        <a href="#" class="btn-secondary" style="margin-left: 1rem;" id="joinTeamModal">Rejoindre l'équipe</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="section-container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-badge">Contact</div>
+        <h2 class="section-title">Rejoignez notre mission</h2>
+        <p class="section-subtitle">Contactez-nous pour en savoir plus sur nos projets ou pour devenir partenaire.</p>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-info animate-on-scroll">
+          <h3 style="margin-bottom: 2rem;">Nos coordonnées</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>contact@aquacultureforall.org</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <h4>Téléphone</h4>
+              <p>+225 07 47 05 10 61</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Adresse</h4>
+              <p>Abidjan, Côte d'Ivoire<br>Bingerville, District Autonome d'Abidjan</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <div>
+              <h4>Horaires</h4>
+              <p>Lun - Ven: 8h00 - 17h00<br>Sam: 8h00 - 12h00</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form animate-on-scroll">
+          <h3 style="margin-bottom: 2rem;">Envoyez-nous un message</h3>
+          
+          <form action="https://formspree.io/f/xanealpd" method="POST">
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Sujet</label>
+              <select id="subject" name="subject">
+                <option value="">Choisir un sujet</option>
+                <option value="partenariat">Partenariat</option>
+                <option value="formation">Formation</option>
+                <option value="donation">Donation</option>
+                <option value="emploi">Opportunité d'emploi</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+      
+      <div style="margin-top: 4rem; text-align: center;">
+        <iframe
+          src="https://maps.google.com/maps?q=bingerville,abidjan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="400"
+          style="border: none; border-radius: 25px; box-shadow: var(--shadow-medium);"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Liens rapides</h3>
+        <div class="footer-links">
+          <a href="#mission">Notre mission</a>
+          <a href="#projets">Nos projets</a>
+          <a href="#impact">Notre impact</a>
+          <a href="#equipe">Notre équipe</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Services</h3>
+        <div class="footer-links">
+          <a href="#">Formation aquaculture</a>
+          <a href="#">Conseil technique</a>
+          <a href="#">Monitoring qualité</a>
+          <a href="#">Recherche & développement</a>
+          <a href="#">Partenariats</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Restez informé de nos dernières actualités et projets.</p>
+        <form style="margin-top: 1rem;">
+          <input type="email" placeholder="Votre email" style="width: 100%; padding: 0.75rem; border: none; border-radius: 25px; margin-bottom: 1rem;">
+          <button type="submit" style="width: 100%; padding: 0.75rem; background: var(--gradient-1); color: white; border: none; border-radius: 25px; font-weight: 600; cursor: pointer;">S'abonner</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="section-container">
+        <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modals -->
   <div id="teamModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2>Conseil d’administration</h2>
-      <label for="roleFilter">Filtrer par rôle :</label>
-      <select id="roleFilter">
-        <option value="all">Tous</option>
-        <option value="Président">Président</option>
-        <option value="Vice-presidente">Vice-presidente</option>
-        <option value="Directeur Technique">Directeur Technique</option>
-        <option value="Secrétaire Administratif AFA">Secrétaire Administratif</option>
-      </select>
-      <ul class="board-list">
-        <li data-role="Président">
-          <img src="./assets/images/AFA_President.png"><div><strong>Dr. Da Costa k. Sebastino</strong><br><small>Président</small></div>
-        </li>
-        <li data-role="Vice-presidente">
-          <img src="./assets/images/AFA_Vice-President.png"><div><strong>Mme. N'gnaore Edwige</strong><br><small>Vice-presidente</small></div>
-        </li>
-        <li data-role="Directeur Technique">
-          <img src="./assets/images/abraham4.jpeg"><div><strong>M. Da Costa k. Abraham</strong><br><small>Directeur Technique</small></div>
-        </li>
-        <li data-role="Tresorier General">
-          <img src="./assets/images/Trésorier Général AFA.png"><div><strong>M. N’Dri Kouassi Vivien</strong><br><small>Trésorier Général AFA</small></div>
-        </li>
-        <li data-role="Conseiller Juridique">
-          <img src="./assets/images/Conseiller juridique AFA.png"><div><strong>M. N’gnaoré Kouadio Antoine</strong><br><small>Conseiller juridique AFA</small></div>
-        </li>
-        <li data-role="Secrétaire Administratif AFA">
-          <img src="./assets/images/Secrétaire Administratif AFA.png"><div><strong>Mme N’guessan Amoin Léocadie</strong><br><small>Secrétaire Administratif AFA</small></div>
-        </li>
-        <li data-role="Conseiller AFA chargé de la sensibilisation et de la formation">
-          <img src="./assets/images/Conseiller AFA chargé de la sensibilisation et de la formation.png"><div><strong>M. Bankolé Guy Alain</strong><br><small>Conseiller AFA chargé de la sensibilisation et de la formation</small></div>
-        </li>
-      </ul>
+      <span class="close" onclick="closeModal('teamModal')">&times;</span>
+      <h2>Conseil d'administration complet</h2>
+      <!-- Team modal content will go here -->
     </div>
   </div>
 
   <div id="joinModal" class="modal">
     <div class="modal-content">
-      <span class="close-join">&times;</span>
-      <h2>Rejoindre l’équipe</h2>
-      <form action="https://formspree.io/f/xanealpd" method="POST" class="join-form">
-        <input type="text" name="name" placeholder="Votre nom complet" required />
-        <input type="email" name="email" placeholder="Votre email" required />
-        <select name="poste" required>
-          <option value="">Poste souhaité</option>
-          <option value="Chargé de communication">Chargé de communication</option>
-          <option value="Responsable terrain">Responsable terrain</option>
-          <option value="Formateur">Formateur</option>
-          <option value="Volontaire">Volontaire</option>
-        </select>
-        <textarea name="message" placeholder="Pourquoi souhaitez-vous nous rejoindre ?" rows="4" required></textarea>
-        <button type="submit">Envoyer ma candidature</button>
-        <p id="formSuccess" style="display:none; color:#00C0E2; font-weight:bold; margin-top:1rem;">Merci pour votre candidature !</p>
-      </form>
+      <span class="close" onclick="closeModal('joinModal')">&times;</span>
+      <h2>Rejoindre notre équipe</h2>
+      <!-- Join team form will go here -->
     </div>
   </div>
-  
-<header class="header">
-  <div class="logo">
-    <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
-  </div>
-  <nav class="navbar">
-    <ul class="menu">
-      <li class="has-dropdown"><button>Accueil</button>
-        <ul class="dropdown">
-          <li><a href="mot-du-president.html">Le mot du Président</a></li>
-          <li><a href="qui-sommes-nous.html">Qui sommes-nous ?</a></li>
-          <li><a href="notre-mission.html">Notre mission</a></li>
-          <li><a href="nos-objectifs.html">Nos objectifs</a></li>
-          <li><a href="notre-organisation.html">Notre organisation</a></li>
-          <li><a href="notre-devise.html">Notre devise</a></li>
-        </ul>
-      </li>
-      <li class="has-dropdown"><button>Activité</button>
-        <ul class="dropdown">
-          <li><a href="domaines-activites.html">Domaines d’activités</a></li>
-          <li><a href="actions-afa.html">Actions de l’ONG AFA</a></li>
-          <li><a href="cibles-afa.html">Cibles</a></li>
-          <li><a href="milieux-etude.html">Milieux d’étude</a></li>
-          <li><a href="partenariats-afa.html">Partenariats</a></li>
-          <li><a href="conferences-seminaires-ateliers.html">Conférences, séminaires et ateliers</a></li>
-          <li><a href="recherche-developpement.html">Recherche / Développement</a></li>
-          <li><a href="sessions-formation.html">Sessions de formation AFA</a></li>
-          <li><a href="conseil-montage-projets.html">Conseil et Montage de projets</a></li>
-          <li><a href="production.html">Production</a></li>
-          <li><a href="videos.html">Vidéos</a></li>
-        </ul>
-      </li>
-      
-      <li class="has-dropdown"><button>Infos utiles</button>
-        <ul class="dropdown">
-          <li><a href="infos-aquaculture.html">Aquaculture</a></li>
-          <li><a href="infos-peche.html">Pêche</a></li>
-        </ul>
-      </li>
-      
-      <li class="has-dropdown"><button>Forum</button>
-        <ul class="dropdown">
-          <li><a href="forum-afa.html">Forum</a></li>
-       
-        </ul>
-      <li class="has-dropdown"><button>Kits</button>
-        <ul class="dropdown">
-          <li><a href="kits-aquaculture.html">Aquaculture</a></li>
-          <li><a href="kits-peche.html">Pêche</a></li>
-        </ul>
-      </li>
 
-      <li class="has-dropdown"><button>Galeries</button>
-     
-        <li class="has-dropdown"><button>Ecitions</button>
-        <ul class="dropdown">
-          <li><a href="editions-afa.html">Editions AFA</a></li>
-          <li><a href="autres-editions.html">Autres publications</a></li>
-        </ul>
-      </li>
-      
-        <li class="has-dropdown"><button>Donations</button>
-          <ul class="dropdown">
-            <li><a href="donation.html">Donation</a></li>
-         
-          </ul>
-
-          <li class="has-dropdown"><button>Contacts</button>
-            <ul class="dropdown">
-              <li><a href="contact-form-ocean-advanced.html">Contacts</a></li>
-           
-            </ul>
-    </ul>
-  </nav>
-</header>
-
-
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="reveal">Une aquaculture durable<br/> et accessible à tous</h1>
-      <p class="reveal">Promouvoir l’autosuffisance en poissons et accompagner les femmes dans l’élevage.</p>
-      <a href="#mission" class="cta reveal">Découvrir notre mission</a>
-    </div>
-    <video class="hero-video-bg" autoplay muted loop playsinline>
-      <source src="./assets/videos/hero-bg.mp4" type="video/mp4" />
-    </video>
-  </section>
-
-  <section class="section mission">
-    <div class="container">
-      <div class="text reveal">
-        <h2>Nous développons des solutions aquacoles innovantes</h2>
-        <p>Notre ONG œuvre pour un monde où chacun peut produire du poisson localement et durablement. Nous accompagnons les femmes, formons les jeunes et expérimentons des technologies adaptées au climat.</p>
-      </div>
-      <div class="image reveal">
-        <img src="./assets/images/team-afa.jpg" alt="Aquaculture Illustration">
-      
-  </section>
-
-  <section class="section problem">
-    <div class="container">
-      <div class="text reveal">
-        <h2>Un enjeu vital pour la sécurité alimentaire</h2>
-        <p>Des millions de personnes souffrent de la dépendance aux importations de poisson. Notre planète fait face à un déséquilibre alimentaire majeur, amplifié par le changement climatique et l’inégalité d’accès aux ressources aquatiques durables.</p>
-      </div>
-      <div class="image reveal">
-        <img src="./assets/images/flyer1.png" alt="Problème Aquatique">
-   
-  </section>
-
-  <section class="section objectifs">
-    <div class="container">
-      <div class="text reveal">
-        <h2>Nos objectifs à l'horizon 2030</h2>
-        <ul>
-          <li>🚺 Autonomiser 10 000 femmes piscicultrices</li>
-          <li>🐟 Réduire de 40% la dépendance aux importations de poisson</li>
-          <li>💧 Mettre en place 500 unités de surveillance de qualité d’eau</li>
-        </ul>
-      </div>
-      <div class="image reveal">
-        <img src="./assets/images/flyer2.png" alt="Objectifs Visuels">
-    
-  </section>
-
-
-  <section id="projets" class="section projets">
-    <div class="container">
-      <h2>Nos Projets</h2>
-  
-      <div class="project-filters">
-        <button class="filter-btn active" data-filter="all">Tous</button>
-        <button class="filter-btn" data-filter="en-cours">En cours</button>
-        <button class="filter-btn" data-filter="passe">Passé</button>
-        <button class="filter-btn" data-filter="a-venir">À venir</button>
-      </div>
-  
-      <div class="project-grid">
-        <div class="project-card" data-category="en-cours">
-          <img src="./assets/images/project1.jpg" alt="Projet 1">
-          <h3>Femmes en Aquaculture</h3>
-          <p>150 femmes formées à la pisciculture</p>
-        </div>
-        <div class="project-card" data-category="a-venir">
-          <img src="./assets/images/project2.jpg" alt="Projet 2">
-          <h3>Tech'Aqua</h3>
-          <p>Déploiement de capteurs d'eau connectés</p>
-        </div>
-        <div class="project-card" data-category="passe">
-          <img src="./assets/images/project3.jpg" alt="Projet 3">
-          <h3>Bassins écoles</h3>
-          <p>10 lycées agricoles équipés de bassins</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section testimonials">
-    <div class="container">
-      <div class="text reveal">
-        <h2>Ils témoignent</h2>
-        <p>Découvrez comment notre programme a transformé la vie de nombreuses familles.</p>
-      </div>
-      <div class="testimonial-cards">
-        <div class="card reveal">
-          <p>“Grâce à la formation reçue, j’ai lancé mon propre bassin piscicole. Aujourd’hui, je vends mes poissons au marché local.”</p>
-          <span>– Aïssata, Bouaké</span>
-        </div>
-        <div class="card reveal">
-          <p>“Le suivi de qualité de l’eau est désormais automatisé. Nos rendements ont augmenté de 30%.”</p>
-          <span>– Jean, Korhogo</span>
-        </div>
-        <div class="card reveal">
-          <p>“Ce projet a changé la perception de la pisciculture dans notre communauté.”</p>
-          <span>– Marie, Yamoussoukro</span>
-        </div>
-     
-  </section>
-
-
-
-  <section id="equipe" class="section equipe">
-    <div class="container">
-      <h2>Notre Équipe</h2>
-      <div class="team-grid">
-        <div class="team-member">
-          <img src="./assets/images/AFA_President.png" alt="Dr. DA COSTA K. SEBASTINO">
-          <h3>Dr. Da Costa K. Sebastino</h3>
-          <p>Président</p>
-        </div>
-        <div class="team-member">
-          <img src="./assets/images/AFA_VICE-president.png" alt="N'gnaore Edwige">
-          <h3>Mme. N'gnaore Edwige</h3>
-          <p>Vice-presidente</p>
-        </div>
-      </div>
-      <div class="cta-container">
-        <a href="#" class="cta" id="showBoardBtn">Voir tout le conseil d’administration</a>
-        <a href="#" class="cta" id="joinTeamBtn">Rejoindre l’équipe</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="section contact">
-    <div class="container">
-      <h2>Nous contacter</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p><strong>Email :</strong> contact@aquacultureforall.org</p>
-          <p><strong>Téléphone :</strong> +225 07 47 05 10 61</p>
-          <p><strong>Adresse :</strong> Abidjan, Côte d’Ivoire</p>
-        </div>
-        <div class="contact-map">
-          <iframe
-            src="https://maps.google.com/maps?q=abidjan&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="250"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-
-
-  
-  
-
-  <footer class="footer">
-    <div class="footer-content">
-      <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
-      <div class="social-links">
-        <a href="#"><img src="./assets/images/facebook.svg" alt="Facebook" /></a>
-        <a href="#"><img src="./assets/images/twitter.svg" alt="Twitter" /></a>
-        <a href="#"><img src="./assets/images/linkedin.svg" alt="LinkedIn" /></a>
-      </div>
-    </div>
-  </footer>
   <script>
-    // Gère les sous-menus avec boutons
-    document.querySelectorAll('.has-dropdown > button').forEach(btn => {
-      btn.addEventListener('click', function (e) {
-        const parent = e.currentTarget.parentElement;
-  
-        // Fermer les autres
-        document.querySelectorAll('.has-dropdown').forEach(el => {
-          if (el !== parent) el.classList.remove('open');
-        });
-  
-        // Toggle menu actuel
-        parent.classList.toggle('open');
-        e.stopPropagation();
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Dropdown functionality
+    const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+    const hasDropdowns = document.querySelectorAll('.has-dropdown');
+
+    // Desktop hover effect
+    hasDropdowns.forEach(dropdown => {
+      dropdown.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768) {
+          dropdown.classList.add('open');
+        }
+      });
+
+      dropdown.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 768) {
+          dropdown.classList.remove('open');
+        }
       });
     });
-  
-    // Ferme tout si clic en dehors
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.has-dropdown').forEach(el => el.classList.remove('open'));
+
+    // Mobile click effect
+    dropdownBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parent = btn.closest('.has-dropdown');
+        
+        // On mobile, toggle the dropdown
+        if (window.innerWidth <= 768) {
+          // Close other dropdowns
+          hasDropdowns.forEach(dropdown => {
+            if (dropdown !== parent) {
+              dropdown.classList.remove('open');
+            }
+          });
+          
+          // Toggle current dropdown
+          parent.classList.toggle('open');
+        }
+      });
     });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.has-dropdown') && !e.target.closest('.hamburger')) {
+        hasDropdowns.forEach(dropdown => {
+          dropdown.classList.remove('open');
+        });
+        
+        if (!e.target.closest('.nav-menu')) {
+          navMenu.classList.remove('active');
+          hamburger.classList.remove('active');
+        }
+      }
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Project filters
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        const filter = btn.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Modal functions
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Modal triggers
+    document.getElementById('showTeamModal')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal('teamModal');
+    });
+
+    document.getElementById('joinTeamModal')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal('joinModal');
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+      }
+    });
+
+    // Form submission
+    document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Add form submission logic here
+      alert('Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+      this.reset();
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroVideo = document.querySelector('.hero-video');
+      if (heroVideo) {
+        heroVideo.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // Counter animation for impact numbers
+    function animateCounter(element, target) {
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current).toLocaleString() + (element.dataset.suffix || '');
+      }, 16);
+    }
+
+    // Trigger counter animation when impact section is visible
+    const impactNumbers = document.querySelectorAll('.impact-number');
+    const impactObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          const text = entry.target.textContent;
+          const number = parseInt(text.replace(/[^\d]/g, ''));
+          entry.target.dataset.suffix = text.replace(/[\d,]/g, '');
+          entry.target.dataset.animated = 'true';
+          animateCounter(entry.target, number);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    impactNumbers.forEach(num => impactObserver.observe(num));
   </script>
-  
-  
 </body>
 </html>
-
-
-
-
