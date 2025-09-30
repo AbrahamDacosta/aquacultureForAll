@@ -1,192 +1,1267 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Domaines d’activités - Aquaculture For All</title>
+  <title>Domaines d'Activités - Aquaculture For All</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9fdff;
-      color: #012433;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .navbar a {
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
-      padding: 0.8rem;
     }
-    .section {
-      padding: 7rem 2rem 4rem;
+
+    .logo:hover {
+      transform: scale(1.05);
     }
-    .container {
-      max-width: 1000px;
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: var(--gradient-1);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
       margin: 0 auto;
     }
-    h1 {
-      color: #00A6D6;
+
+    /* Overview Section */
+    .overview-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .overview-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
       text-align: center;
+    }
+
+    .overview-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary-blue);
       margin-bottom: 2rem;
+      position: relative;
     }
-    h2 {
-      color: #014455;
-      margin-top: 2rem;
+
+    .overview-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 2px;
     }
-    p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
+
+    .overview-description {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: var(--text-dark);
+      max-width: 800px;
+      margin: 0 auto 3rem;
     }
-    .activity-block {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      margin: 2rem 0;
+
+    .overview-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
     }
-    .activity-block img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    .activity-block div {
-      flex: 1;
-    }
-    .footer {
-      background: #001A26;
-      color: #ccc;
+
+    .stat-item {
+      background: var(--light-blue);
+      padding: 2rem;
+      border-radius: 20px;
       text-align: center;
-      padding: 2rem 1rem;
+      transition: all 0.3s ease;
     }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
     }
-    .header {
-      background: #012433;
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Activities Section */
+    .activities-section {
+      padding: 6rem 0;
+      background: var(--light-blue);
+    }
+
+    .activities-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gradient-1);
       color: white;
-      padding: 1rem 2rem;
-      position: fixed;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .activity-card {
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      position: relative;
+      border-left: 4px solid var(--primary-blue);
+    }
+
+    .activity-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+      border-left-color: var(--accent-aqua);
+    }
+
+    .activity-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .activity-image img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .activity-card:hover .activity-image img {
+      transform: scale(1.1);
+    }
+
+    .activity-overlay {
+      position: absolute;
       top: 0;
       left: 0;
-      z-index: 1000;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(11, 126, 200, 0.8), rgba(0, 212, 230, 0.6));
+      opacity: 0;
+      transition: opacity 0.3s ease;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: center;
     }
-    .logo img {
+
+    .activity-card:hover .activity-overlay {
+      opacity: 1;
+    }
+
+    .activity-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.5rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .activity-content {
+      padding: 2.5rem;
+    }
+
+    .activity-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .activity-title-icon {
+      width: 50px;
       height: 50px;
-      max-width: 180px;
-      object-fit: contain;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      flex-shrink: 0;
     }
-    .navbar ul {
-      list-style: none;
+
+    .activity-description {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .activity-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .feature-tag {
+      background: rgba(11, 126, 200, 0.1);
+      color: var(--primary-blue);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Expertise Areas */
+    .expertise-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .expertise-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .expertise-item {
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(11, 126, 200, 0.1);
+    }
+
+    .expertise-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+      background: linear-gradient(135deg, white 0%, var(--light-blue) 100%);
+    }
+
+    .expertise-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .expertise-title {
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .expertise-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 0;
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
       display: flex;
       gap: 1.5rem;
-      padding: 0;
-      margin: 0;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .navbar a {
-      color: white;
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
       text-decoration: none;
-      padding: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .overview-section,
+      .activities-section,
+      .expertise-section,
+      .cta-section {
+        padding: 4rem 0;
+      }
+
+      .overview-container,
+      .activities-container,
+      .expertise-container,
+      .cta-container {
+        padding: 0 1rem;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      .activities-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .activity-card {
+        margin: 0 auto;
+        max-width: 500px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+
+      .overview-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .expertise-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .activity-content {
+        padding: 2rem;
+      }
+
+      .overview-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo-afa.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </a>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="qui-sommes-nous.html" class="nav-link">Qui sommes-nous</a></li>
+          <li class="nav-item"><a href="notre-mission.html" class="nav-link">Mission</a></li>
+          <li class="nav-item"><a href="nos-objectifs.html" class="nav-link">Objectifs</a></li>
+          <li class="nav-item"><a href="index.html#equipe" class="nav-link">Équipe</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </div>
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html#hero">Accueil</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="index.html#projets">Projets</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <h1>Domaines d’activités</h1>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="breadcrumb animate-on-scroll">
+          🏠 Accueil → Activité → Domaines d'Activités
+        </div>
+        <h1 class="hero-title animate-on-scroll">Domaines d'Activités</h1>
+        <p class="hero-subtitle animate-on-scroll">Six expertises complémentaires pour un développement durable de l'aquaculture</p>
+      </div>
+    </section>
 
-      <div class="activity-block">
-        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80" alt="Pêche">
-        <div>
-          <h2>Expertise</h2>
-          <p>Aménagements aquacoles, étude d’impact environnemental, gestion des zones halieutiques, éducation des communautés de pêcheurs et pisciculteurs, appui-conseil pour la transformation des produits de pêche.</p>
+    <!-- Overview Section -->
+    <section class="overview-section">
+      <div class="overview-container">
+        <div class="overview-content animate-on-scroll">
+          <h2>Notre Expertise Multi-domaines</h2>
+          <p class="overview-description">
+            L'ONG AFA développe une approche holistique à travers six domaines d'activités complémentaires, couvrant l'ensemble de la chaîne de valeur aquacole pour un impact maximal sur les communautés.
+          </p>
+          
+          <div class="overview-stats">
+            <div class="stat-item">
+              <span class="stat-number">6</span>
+              <span class="stat-label">Domaines d'expertise</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">360°</span>
+              <span class="stat-label">Approche complète</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Solutions durables</span>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="activity-block">
-        <img src="http://plus.unsplash.com/premium_photo-1710197190245-5d2a32b98e63?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Genre">
-        <div>
-          <h2>Le Genre</h2>
-          <p>Promotion de l’aquaculture et de la pêche auprès des femmes et jeunes. Sensibilisation, formation et insertion professionnelle pour une meilleure inclusion dans la filière.</p>
+    <!-- Activities Section -->
+    <section class="activities-section">
+      <div class="activities-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Nos Activités</div>
+          <h2 class="section-title">Six Domaines d'Excellence</h2>
+          <p class="section-subtitle">Une expertise complète pour accompagner tous les acteurs de la filière aquacole</p>
+        </div>
+        
+        <div class="activities-grid">
+          <!-- Expertise -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80" alt="Expertise Aquacole">
+              <div class="activity-overlay">
+                <div class="activity-icon">🔬</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">🔬</div>
+                Expertise Technique
+              </h3>
+              <p class="activity-description">
+                Aménagements aquacoles, étude d'impact environnemental, gestion des zones halieutiques, éducation des communautés de pêcheurs et pisciculteurs, appui-conseil pour la transformation des produits de pêche.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">Aménagements</span>
+                <span class="feature-tag">Impact environnemental</span>
+                <span class="feature-tag">Zones halieutiques</span>
+                <span class="feature-tag">Transformation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Genre -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://plus.unsplash.com/premium_photo-1710197190245-5d2a32b98e63?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Genre et Inclusion">
+              <div class="activity-overlay">
+                <div class="activity-icon">👥</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">👥</div>
+                Genre & Inclusion
+              </h3>
+              <p class="activity-description">
+                Promotion de l'aquaculture et de la pêche auprès des femmes et jeunes. Sensibilisation, formation et insertion professionnelle pour une meilleure inclusion dans la filière.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">Autonomisation femmes</span>
+                <span class="feature-tag">Formation jeunes</span>
+                <span class="feature-tag">Insertion professionnelle</span>
+                <span class="feature-tag">Inclusion</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formation -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1200&q=80" alt="Formation et Recyclage">
+              <div class="activity-overlay">
+                <div class="activity-icon">🎓</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">🎓</div>
+                Formation & Recyclage
+              </h3>
+              <p class="activity-description">
+                Formations diplômantes (BTS, DUT, Master, Doctorat) et qualifiantes. Stages de perfectionnement pour formateurs dans les disciplines de l'aquaculture, pêche, hydrobiologie et conservation des produits.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">BTS/DUT/Master</span>
+                <span class="feature-tag">Formations qualifiantes</span>
+                <span class="feature-tag">Perfectionnement</span>
+                <span class="feature-tag">Hydrobiologie</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recherche -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://plus.unsplash.com/premium_photo-1661371828986-eb24ec440306?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Recherche et Développement">
+              <div class="activity-overlay">
+                <div class="activity-icon">🔬</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">🔬</div>
+                Recherche & Développement
+              </h3>
+              <p class="activity-description">
+                Projets participatifs de développement, gestion de projets clé-en-main, démonstrations sur site école, élevage intensif de poissons en circuit fermé.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">Projets participatifs</span>
+                <span class="feature-tag">Clé-en-main</span>
+                <span class="feature-tag">Sites écoles</span>
+                <span class="feature-tag">Circuit fermé</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appui Aquaculteurs -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://images.unsplash.com/photo-1600150806193-cf869bcfee05?q=80&w=3131&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Appui aux Aquaculteurs">
+              <div class="activity-overlay">
+                <div class="activity-icon">🏗️</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">🏗️</div>
+                Appui aux Aquaculteurs
+              </h3>
+              <p class="activity-description">
+                Appui technique et accompagnement pour la création et le suivi de fermes aquacoles modernes, adaptées à divers environnements.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">Appui technique</span>
+                <span class="feature-tag">Fermes modernes</span>
+                <span class="feature-tag">Suivi personnalisé</span>
+                <span class="feature-tag">Adaptabilité</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Appui Communautés -->
+          <div class="activity-card animate-on-scroll">
+            <div class="activity-image">
+              <img src="https://images.unsplash.com/photo-1526625361769-ab16cb89b155?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Appui aux Communautés">
+              <div class="activity-overlay">
+                <div class="activity-icon">🤝</div>
+              </div>
+            </div>
+            <div class="activity-content">
+              <h3 class="activity-title">
+                <div class="activity-title-icon">🤝</div>
+                Appui aux Communautés
+              </h3>
+              <p class="activity-description">
+                Développement de la pêche artisanale, structuration des acteurs, appui à l'autonomisation et projets durables pour les pêcheurs.
+              </p>
+              <div class="activity-features">
+                <span class="feature-tag">Pêche artisanale</span>
+                <span class="feature-tag">Structuration</span>
+                <span class="feature-tag">Autonomisation</span>
+                <span class="feature-tag">Projets durables</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="activity-block">
-        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=1200&q=80" alt="Formation">
-        <div>
-          <h2>Formation et Recyclage</h2>
-          <p>Formations diplômantes (BTS, DUT, Master, Doctorat) et qualifiantes. Stages de perfectionnement pour formateurs dans les disciplines de l’aquaculture, pêche, hydrobiologie et conservation des produits.</p>
+    <!-- Expertise Areas -->
+    <section class="expertise-section">
+      <div class="expertise-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Expertises Transversales</div>
+          <h2 class="section-title">Compétences Clés</h2>
+          <p class="section-subtitle">Des savoir-faire essentiels qui irriguent tous nos domaines d'activité</p>
+        </div>
+        
+        <div class="expertise-grid">
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🌊</span>
+            <h4 class="expertise-title">Gestion de l'Eau</h4>
+            <p class="expertise-description">Qualité, traitement et optimisation des ressources hydriques</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🐟</span>
+            <h4 class="expertise-title">Biologie Aquatique</h4>
+            <p class="expertise-description">Connaissance des espèces et écosystèmes aquatiques</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">📊</span>
+            <h4 class="expertise-title">Gestion de Projet</h4>
+            <p class="expertise-description">Planification, suivi et évaluation des interventions</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🔧</span>
+            <h4 class="expertise-title">Innovation Technique</h4>
+            <p class="expertise-description">Développement de solutions adaptées au contexte local</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">💼</span>
+            <h4 class="expertise-title">Développement Commercial</h4>
+            <p class="expertise-description">Marketing, vente et structuration des filières</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🌱</span>
+            <h4 class="expertise-title">Durabilité</h4>
+            <p class="expertise-description">Pratiques respectueuses de l'environnement</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="activity-block">
-        <img src="https://plus.unsplash.com/premium_photo-1661371828986-eb24ec440306?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Recherche">
-        <div>
-          <h2>Recherche / Développement</h2>
-          <p>Projets participatifs de développement, gestion de projets clé-en-main, démonstrations sur site école, élevage intensif de poissons en circuit fermé.</p>
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title animate-on-scroll">Collaborons ensemble</h2>
+        <p class="cta-description animate-on-scroll">Bénéficiez de notre expertise multi-domaines pour vos projets aquacoles</p>
+        <div class="cta-buttons">
+          <a href="index.html#contact" class="btn-primary animate-on-scroll">Nous contacter</a>
+          <a href="index.html#projets" class="btn-secondary animate-on-scroll">Voir nos réalisations</a>
         </div>
       </div>
-
-      <div class="activity-block">
-        <img src="https://images.unsplash.com/photo-1600150806193-cf869bcfee05?q=80&w=3131&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Appui">
-        <div>
-          <h2>Appui aux aquaculteurs</h2>
-          <p>Appui technique et accompagnement pour la création et le suivi de fermes aquacoles modernes, adaptées à divers environnements.</p>
-        </div>
-      </div>
-
-      <div class="activity-block">
-        <img src="https://images.unsplash.com/photo-1526625361769-ab16cb89b155?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Communautés">
-        <div>
-          <h2>Appui aux communautés de pêche</h2>
-          <p>Développement de la pêche artisanale, structuration des acteurs, appui à l’autonomisation et projets durables pour les pêcheurs.</p>
-        </div>
-      </div>
-    </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Domaines d'Activités</h3>
+        <div class="footer-links">
+          <a href="#">Expertise Technique</a>
+          <a href="#">Genre & Inclusion</a>
+          <a href="#">Formation & Recyclage</a>
+          <a href="#">Recherche & Développement</a>
+          <a href="#">Appui aux Aquaculteurs</a>
+          <a href="#">Appui aux Communautés</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Expertises</h3>
+        <div class="footer-links">
+          <a href="#">Gestion de l'Eau</a>
+          <a href="#">Biologie Aquatique</a>
+          <a href="#">Innovation Technique</a>
+          <a href="#">Développement Commercial</a>
+          <a href="#">Durabilité</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 contact@aquacultureforall.org</p>
+        <p>📱 +225 07 47 05 10 61</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
+    </div>
   </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Staggered animations for activity cards
+    const activityCards = document.querySelectorAll('.activity-card');
+    activityCards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.2}s`;
+    });
+
+    // Expertise items animation
+    const expertiseItems = document.querySelectorAll('.expertise-item');
+    expertiseItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Interactive hover effects for activity cards
+    activityCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.borderLeftWidth = '6px';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.borderLeftWidth = '4px';
+      });
+    });
+
+    // Parallax effect for activity images
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const activityImages = document.querySelectorAll('.activity-image img');
+      
+      activityImages.forEach((img, index) => {
+        const rate = scrolled * 0.01 * (index % 2 === 0 ? 1 : -1);
+        img.style.transform = `translateY(${rate}px) scale(1.1)`;
+      });
+    });
+
+    // Count animation for stats
+    function animateCounter(element, target) {
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        
+        if (target === 360) {
+          element.textContent = Math.floor(current) + '°';
+        } else if (target === 100) {
+          element.textContent = Math.floor(current) + '%';
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 16);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          const text = entry.target.textContent;
+          let number;
+          
+          if (text.includes('°')) {
+            number = 360;
+          } else if (text.includes('%')) {
+            number = 100;
+          } else {
+            number = parseInt(text);
+          }
+          
+          entry.target.dataset.animated = 'true';
+          animateCounter(entry.target, number);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(num => statsObserver.observe(num));
+  </script>
 </body>
 </html>

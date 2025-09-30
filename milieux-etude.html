@@ -1,143 +1,1175 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Milieux d’étude - Aquaculture For All</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milieux d'Étude - Aquaculture For All</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fbff;
-      color: #012433;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .navbar a {
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
-      padding: 0.8rem;
     }
-    .section {
-      padding: 7rem 2rem 4rem;
+
+    .logo:hover {
+      transform: scale(1.05);
     }
-    .container {
-      max-width: 800px;
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: var(--gradient-1);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
       margin: 0 auto;
     }
-    h1 {
-      color: #00A6D6;
-      margin-bottom: 2rem;
+
+    /* Introduction Section */
+    .intro-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .intro-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
       text-align: center;
     }
-    ul.milieux-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    ul.milieux-list li {
-      margin-bottom: 1.2rem;
-      padding-left: 2rem;
+
+    .intro-card {
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+      padding: 3rem;
+      border-radius: 25px;
+      box-shadow: var(--shadow-medium);
+      border: 1px solid rgba(11, 126, 200, 0.1);
       position: relative;
-      line-height: 1.6;
+      overflow: hidden;
     }
-    ul.milieux-list li::before {
-      content: "🌊";
+
+    .intro-card::before {
+      content: '';
       position: absolute;
-      left: 0;
-      font-size: 1.1rem;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(11, 126, 200, 0.05) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      pointer-events: none;
     }
-    .footer {
-      background: #001A26;
-      color: #ccc;
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .intro-text {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-highlight {
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+
+    /* Milieux Section */
+    .milieux-section {
+      padding: 8rem 0;
+      background: var(--light-blue);
+    }
+
+    .milieux-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
       text-align: center;
-      padding: 2rem 1rem;
+      margin-bottom: 4rem;
     }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .header {
-      background: #012433;
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gradient-1);
       color: white;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .milieux-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .milieu-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary-blue);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .milieu-card::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
-      z-index: 1000;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(11, 126, 200, 0.05) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .milieu-card:hover::before {
+      opacity: 1;
+    }
+
+    .milieu-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+      border-top-color: var(--accent-aqua);
+    }
+
+    .milieu-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
     }
-    .logo img {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
-    }
-    .navbar ul {
-      list-style: none;
+
+    .milieu-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-1);
+      border-radius: 15px;
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .milieu-card:hover .milieu-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .milieu-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      position: relative;
+      z-index: 2;
+    }
+
+    .milieu-description {
+      color: var(--text-light);
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 1.5rem;
+    }
+
+    .milieu-features {
+      background: rgba(11, 126, 200, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .milieu-features h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .milieu-features ul {
+      list-style: none;
       padding: 0;
       margin: 0;
     }
-    .navbar a {
+
+    .milieu-features li {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .milieu-features li::before {
+      content: "•";
+      color: var(--primary-blue);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    /* Ecosystem Visualization */
+    .ecosystem-section {
+      padding: 6rem 0;
+      background: var(--dark-blue);
       color: white;
+    }
+
+    .ecosystem-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .ecosystem-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .ecosystem-step {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      min-width: 200px;
+      flex: 1;
+      max-width: 250px;
+    }
+
+    .ecosystem-step:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .ecosystem-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-2);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--dark-blue);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .ecosystem-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .ecosystem-description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .flow-arrow {
+      font-size: 2rem;
+      color: var(--secondary-blue);
+      margin: 0 1rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 0;
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
       text-decoration: none;
-      padding: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .intro-section,
+      .milieux-section,
+      .ecosystem-section,
+      .cta-section {
+        padding: 4rem 0;
+      }
+
+      .intro-container,
+      .milieux-container,
+      .ecosystem-container,
+      .cta-container {
+        padding: 0 1rem;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      .intro-card {
+        padding: 2rem;
+      }
+
+      .milieux-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .milieu-card {
+        padding: 2rem;
+      }
+
+      .ecosystem-flow {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .milieu-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .ecosystem-step {
+        min-width: 180px;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo-afa.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </a>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="qui-sommes-nous.html" class="nav-link">Qui sommes-nous</a></li>
+          <li class="nav-item"><a href="notre-mission.html" class="nav-link">Mission</a></li>
+          <li class="nav-item"><a href="nos-objectifs.html" class="nav-link">Objectifs</a></li>
+          <li class="nav-item"><a href="notre-organisation.html" class="nav-link">Organisation</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </div>
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html#hero">Accueil</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="index.html#projets">Projets</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <h1>Milieux d’étude</h1>
-      <p>L’ONG AFA concentre ses actions de recherche, de formation et de production sur des milieux aquatiques variés, représentatifs des réalités écologiques locales :</p>
-      <ul class="milieux-list">
-        <li>Bassins fluviaux et lacustres</li>
-        <li>Plans d’eau lagunaires et maritimes</li>
-        <li>Étangs aquacoles</li>
-        <li>Unités de production aquacole en circuit fermé</li>
-      </ul>
-    </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="breadcrumb animate-on-scroll">
+          🏠 Accueil → Milieux d'Étude
+        </div>
+        <h1 class="hero-title animate-on-scroll">Milieux d'Étude</h1>
+        <p class="hero-subtitle animate-on-scroll">Des écosystèmes aquatiques diversifiés pour une recherche et production optimales</p>
+      </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+      <div class="intro-container">
+        <div class="intro-card animate-on-scroll">
+          <p class="intro-text">
+            L'<span class="intro-highlight">ONG AFA</span> concentre ses actions de recherche, de formation et de production sur des milieux aquatiques variés, représentatifs des réalités écologiques locales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Milieux Section -->
+    <section class="milieux-section">
+      <div class="milieux-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Nos Écosystèmes</div>
+          <h2 class="section-title">Milieux d'Intervention</h2>
+          <p class="section-subtitle">4 environnements aquatiques stratégiques pour une approche complète et durable</p>
+        </div>
+        
+        <div class="milieux-grid">
+          <div class="milieu-card animate-on-scroll">
+            <div class="milieu-header">
+              <div class="milieu-icon">🏞️</div>
+              <h3 class="milieu-title">Bassins Fluviaux et Lacustres</h3>
+            </div>
+            <p class="milieu-description">
+              Environnements d'eau douce naturels incluant rivières, fleuves et lacs, offrant des conditions écologiques diversifiées pour l'aquaculture extensive.
+            </p>
+            <div class="milieu-features">
+              <h4>Caractéristiques clés :</h4>
+              <ul>
+                <li>Écosystèmes naturels préservés</li>
+                <li>Biodiversité aquatique riche</li>
+                <li>Conditions hydrologiques variées</li>
+                <li>Intégration communautaire naturelle</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milieu-card animate-on-scroll">
+            <div class="milieu-header">
+              <div class="milieu-icon">🌊</div>
+              <h3 class="milieu-title">Plans d'Eau Lagunaires et Maritimes</h3>
+            </div>
+            <p class="milieu-description">
+              Zones côtières et lagunaires offrant des conditions saumâtres et marines idéales pour l'élevage d'espèces spécialisées et la mariculture.
+            </p>
+            <div class="milieu-features">
+              <h4>Avantages spécifiques :</h4>
+              <ul>
+                <li>Salinité variable adaptable</li>
+                <li>Espèces à haute valeur ajoutée</li>
+                <li>Accès aux marchés côtiers</li>
+                <li>Cycles biologiques naturels</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milieu-card animate-on-scroll">
+            <div class="milieu-header">
+              <div class="milieu-icon">🏊</div>
+              <h3 class="milieu-title">Étangs Aquacoles</h3>
+            </div>
+            <p class="milieu-description">
+              Installations d'élevage semi-intensives permettant un contrôle optimisé des conditions de production et une gestion durable des ressources.
+            </p>
+            <div class="milieu-features">
+              <h4>Contrôles possibles :</h4>
+              <ul>
+                <li>Qualité de l'eau maîtrisée</li>
+                <li>Densité de poissons optimisée</li>
+                <li>Alimentation contrôlée</li>
+                <li>Rendements prévisibles</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="milieu-card animate-on-scroll">
+            <div class="milieu-header">
+              <div class="milieu-icon">🔧</div>
+              <h3 class="milieu-title">Unités de Production en Circuit Fermé</h3>
+            </div>
+            <p class="milieu-description">
+              Systèmes aquacoles intensifs et technologiques offrant un contrôle total de l'environnement de production pour une efficacité maximale.
+            </p>
+            <div class="milieu-features">
+              <h4>Technologies intégrées :</h4>
+              <ul>
+                <li>Recirculation de l'eau</li>
+                <li>Filtration biologique</li>
+                <li>Contrôle climatique</li>
+                <li>Traçabilité complète</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ecosystem Flow -->
+    <section class="ecosystem-section">
+      <div class="ecosystem-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge" style="background: rgba(255, 255, 255, 0.2);">Approche Intégrée</div>
+          <h2 class="section-title" style="color: white;">De l'Extensif à l'Intensif</h2>
+          <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Une progression logique vers la maîtrise technique</p>
+        </div>
+        
+        <div class="ecosystem-flow">
+          <div class="ecosystem-step animate-on-scroll">
+            <div class="ecosystem-icon">1</div>
+            <h4 class="ecosystem-title">Naturel</h4>
+            <p class="ecosystem-description">Bassins fluviaux et lacustres - Apprentissage des bases</p>
+          </div>
+          
+          <div class="flow-arrow">→</div>
+          
+          <div class="ecosystem-step animate-on-scroll">
+            <div class="ecosystem-icon">2</div>
+            <h4 class="ecosystem-title">Côtier</h4>
+            <p class="ecosystem-description">Plans d'eau lagunaires - Diversification des espèces</p>
+          </div>
+          
+          <div class="flow-arrow">→</div>
+          
+          <div class="ecosystem-step animate-on-scroll">
+            <div class="ecosystem-icon">3</div>
+            <h4 class="ecosystem-title">Contrôlé</h4>
+            <p class="ecosystem-description">Étangs aquacoles - Optimisation des rendements</p>
+          </div>
+          
+          <div class="flow-arrow">→</div>
+          
+          <div class="ecosystem-step animate-on-scroll">
+            <div class="ecosystem-icon">4</div>
+            <h4 class="ecosystem-title">Intensif</h4>
+            <p class="ecosystem-description">Circuit fermé - Maîtrise technologique</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title animate-on-scroll">Explorez Nos Milieux</h2>
+        <p class="cta-description animate-on-scroll">Découvrez comment nous adaptons nos méthodes à chaque environnement aquatique pour maximiser l'impact et la durabilité</p>
+        <div class="cta-buttons">
+          <a href="index.html#contact" class="btn-primary animate-on-scroll">Nous Contacter</a>
+          <a href="index.html#projets" class="btn-secondary animate-on-scroll">Voir nos Projets</a>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Nos Milieux</h3>
+        <div class="footer-links">
+          <a href="#">Bassins Fluviaux</a>
+          <a href="#">Plans d'Eau Lagunaires</a>
+          <a href="#">Étangs Aquacoles</a>
+          <a href="#">Circuits Fermés</a>
+          <a href="#">Recherche & Formation</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Approches</h3>
+        <div class="footer-links">
+          <a href="#">Aquaculture Extensive</a>
+          <a href="#">Production Semi-Intensive</a>
+          <a href="#">Systèmes Intensifs</a>
+          <a href="#">Innovation Technologique</a>
+          <a href="#">Durabilité</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 contact@aquacultureforall.org</p>
+        <p>📱 +225 07 47 05 10 61</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
+    </div>
   </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Staggered animations for milieu cards
+    const milieuCards = document.querySelectorAll('.milieu-card');
+    milieuCards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.2}s`;
+    });
+
+    // Interactive hover effects for milieu cards
+    milieuCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.borderTopWidth = '6px';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.borderTopWidth = '4px';
+      });
+    });
+
+    // Ecosystem steps animation
+    const ecosystemSteps = document.querySelectorAll('.ecosystem-step');
+    ecosystemSteps.forEach((step, index) => {
+      step.style.transitionDelay = `${index * 0.3}s`;
+    });
+
+    // Wave animation for water-related icons
+    const waterIcons = document.querySelectorAll('.milieu-icon');
+    waterIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        icon.style.animation = 'wave 0.8s ease';
+      });
+      
+      icon.addEventListener('animationend', () => {
+        icon.style.animation = '';
+      });
+    });
+
+    // Add wave animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes wave {
+        0%, 100% { transform: translateY(0) scale(1); }
+        25% { transform: translateY(-5px) scale(1.05); }
+        50% { transform: translateY(-10px) scale(1.1); }
+        75% { transform: translateY(-5px) scale(1.05); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Parallax effect for milieu cards
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      milieuCards.forEach((card, index) => {
+        const rate = scrolled * 0.003 * (index % 2 === 0 ? 1 : -1);
+        card.style.transform = `translateY(${rate}px)`;
+      });
+    });
+
+    // Dynamic background animation for intro card
+    const introCard = document.querySelector('.intro-card');
+    if (introCard) {
+      let rotation = 0;
+      setInterval(() => {
+        rotation += 0.5;
+        const before = introCard.querySelector('::before');
+        if (before) {
+          before.style.transform = `rotate(${rotation}deg)`;
+        }
+      }, 100);
+    }
+
+    // Ecosystem flow interaction
+    ecosystemSteps.forEach((step, index) => {
+      step.addEventListener('click', () => {
+        ecosystemSteps.forEach(s => s.classList.remove('active'));
+        step.classList.add('active');
+        
+        // Optional: Add special styling for active step
+        step.style.background = 'rgba(255, 255, 255, 0.2)';
+        setTimeout(() => {
+          step.style.background = '';
+        }, 2000);
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,143 +1,1232 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sessions de formation AFA - Aquaculture For All</title>
+  <title>Sessions de Formation AFA - Aquaculture For All</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fbff;
-      color: #012433;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .navbar a {
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
-      padding: 0.8rem;
     }
-    .section {
-      padding: 7rem 2rem 4rem;
+
+    .logo:hover {
+      transform: scale(1.05);
     }
-    .container {
-      max-width: 900px;
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: var(--gradient-1);
+      color: white;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
       margin: 0 auto;
     }
-    h1 {
-      color: #00A6D6;
-      margin-bottom: 2rem;
-      text-align: center;
+
+    /* Introduction Section */
+    .intro-section {
+      padding: 6rem 0;
+      background: white;
     }
-    p {
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
+
+    .intro-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
-    ul {
-      margin-top: 1rem;
-      padding-left: 1.5rem;
-    }
-    ul li {
-      margin-bottom: 1rem;
-      list-style: "🎓 ";
-    }
-    .footer {
-      background: #001A26;
-      color: #ccc;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
       align-items: center;
     }
-    .logo img {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
+
+    .intro-content {
+      position: relative;
+      z-index: 2;
     }
-    .navbar ul {
-      list-style: none;
+
+    .intro-text {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-highlight {
+      color: var(--primary-blue);
+      font-weight: 600;
+    }
+
+    .intro-visual {
+      background: var(--gradient-1);
+      border-radius: 25px;
+      padding: 3rem;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-visual::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .intro-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-features {
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-feature {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Process Section */
+    .process-section {
+      padding: 6rem 0;
+      background: var(--light-blue);
+    }
+
+    .process-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .process-card {
+      background: white;
+      padding: 3rem;
+      border-radius: 25px;
+      box-shadow: var(--shadow-medium);
+      border: 1px solid rgba(11, 126, 200, 0.1);
+    }
+
+    .process-text {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    /* Themes Section */
+    .themes-section {
+      padding: 8rem 0;
+      background: white;
+    }
+
+    .themes-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .theme-card {
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary-blue);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(11, 126, 200, 0.05) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-card:hover::before {
+      opacity: 1;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+      border-top-color: var(--accent-aqua);
+    }
+
+    .theme-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .theme-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-1);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .theme-card:hover .theme-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .theme-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      position: relative;
+      z-index: 2;
+    }
+
+    .theme-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.4;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Objectives Section */
+    .objectives-section {
+      padding: 6rem 0;
+      background: var(--dark-blue);
+      color: white;
+    }
+
+    .objectives-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .objectives-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 4rem 3rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .objectives-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(135, 206, 235, 0.1) 0%, transparent 70%);
+      animation: rotate 40s linear infinite;
+      pointer-events: none;
+    }
+
+    .objectives-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .objectives-icon {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      display: block;
+      color: var(--secondary-blue);
+    }
+
+    .objectives-text {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .objectives-highlight {
+      color: var(--secondary-blue);
+      font-weight: 600;
+    }
+
+    .objectives-tag {
+      background: var(--gradient-2);
+      color: var(--dark-blue);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 0;
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
       display: flex;
       gap: 1.5rem;
-      padding: 0;
-      margin: 0;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .navbar a {
-      color: white;
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
       text-decoration: none;
-      padding: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .intro-section,
+      .process-section,
+      .themes-section,
+      .objectives-section,
+      .cta-section {
+        padding: 4rem 0;
+      }
+
+      .intro-container,
+      .process-container,
+      .themes-container,
+      .objectives-container,
+      .cta-container {
+        padding: 0 1rem;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .process-card {
+        padding: 2rem;
+      }
+
+      .themes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .theme-card {
+        padding: 2rem;
+      }
+
+      .objectives-card {
+        padding: 3rem 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .theme-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .intro-visual {
+        padding: 2rem;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo-afa.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </a>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="qui-sommes-nous.html" class="nav-link">Qui sommes-nous</a></li>
+          <li class="nav-item"><a href="notre-mission.html" class="nav-link">Mission</a></li>
+          <li class="nav-item"><a href="nos-objectifs.html" class="nav-link">Objectifs</a></li>
+          <li class="nav-item"><a href="notre-organisation.html" class="nav-link">Organisation</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </div>
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html#hero">Accueil</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="index.html#projets">Projets</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <h1>Sessions de formation AFA</h1>
-      <p>Dans le cadre de ses activités de renforcement des capacités, l’ONG <strong>Aquaculture For All</strong> met en place des <strong>ateliers thématiques de formation</strong> destinés aux acteurs des filières pêche et aquaculture.</p>
-      <p>Ces sessions, organisées de manière périodique, sont annoncées via <strong>des appels à participation</strong> publiés sur notre site web.</p>
-      <p>Les thématiques abordées couvrent des enjeux à la fois traditionnels et innovants, parmi lesquels :</p>
-      <ul>
-        <li>Les techniques d’élevage piscicole et d’aménagement d’étangs</li>
-        <li>Les systèmes de recirculation et aquaponie</li>
-        <li>La transformation et conservation des produits halieutiques</li>
-        <li>L’économie de la pêche et l’entrepreneuriat aquacole</li>
-        <li>La gestion durable des ressources et des écosystèmes aquatiques</li>
-      </ul>
-      <p>L’objectif est de permettre aux bénéficiaires de mieux maîtriser les déterminants des filières, d’intensifier la production et de préserver durablement les écosystèmes exploités.</p>
-    </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="breadcrumb animate-on-scroll">
+          🏠 Accueil → Sessions de Formation
+        </div>
+        <h1 class="hero-title animate-on-scroll">Sessions de Formation AFA</h1>
+        <p class="hero-subtitle animate-on-scroll">Ateliers thématiques pour le renforcement des capacités aquacoles</p>
+      </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+      <div class="intro-container">
+        <div class="intro-grid">
+          <div class="intro-content animate-on-scroll">
+            <p class="intro-text">
+              Dans le cadre de ses activités de renforcement des capacités, l'<span class="intro-highlight">ONG Aquaculture For All</span> met en place des <span class="intro-highlight">ateliers thématiques de formation</span> destinés aux acteurs des filières pêche et aquaculture.
+            </p>
+          </div>
+          <div class="intro-visual animate-on-scroll">
+            <span class="intro-icon">🎓</span>
+            <div class="intro-features">
+              <div class="intro-feature">
+                📅 Sessions Périodiques
+              </div>
+              <div class="intro-feature">
+                🌐 Appels à Participation
+              </div>
+              <div class="intro-feature">
+                🎯 Ateliers Thématiques
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+      <div class="process-container">
+        <div class="process-card animate-on-scroll">
+          <p class="process-text">
+            Ces sessions, organisées de manière périodique, sont annoncées via <span class="intro-highlight">des appels à participation</span> publiés sur notre site web.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Themes Section -->
+    <section class="themes-section">
+      <div class="themes-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Thématiques Abordées</div>
+          <h2 class="section-title">Domaines de Formation</h2>
+          <p class="section-subtitle">5 thématiques couvrant les enjeux traditionnels et innovants de l'aquaculture</p>
+        </div>
+        
+        <div class="themes-grid">
+          <div class="theme-card animate-on-scroll">
+            <div class="theme-header">
+              <div class="theme-icon">🐟</div>
+              <span class="theme-number">01</span>
+            </div>
+            <h3 class="theme-title">
+              Les techniques d'élevage piscicole et d'aménagement d'étangs
+            </h3>
+          </div>
+
+          <div class="theme-card animate-on-scroll">
+            <div class="theme-header">
+              <div class="theme-icon">🔄</div>
+              <span class="theme-number">02</span>
+            </div>
+            <h3 class="theme-title">
+              Les systèmes de recirculation et aquaponie
+            </h3>
+          </div>
+
+          <div class="theme-card animate-on-scroll">
+            <div class="theme-header">
+              <div class="theme-icon">🏭</div>
+              <span class="theme-number">03</span>
+            </div>
+            <h3 class="theme-title">
+              La transformation et conservation des produits halieutiques
+            </h3>
+          </div>
+
+          <div class="theme-card animate-on-scroll">
+            <div class="theme-header">
+              <div class="theme-icon">💼</div>
+              <span class="theme-number">04</span>
+            </div>
+            <h3 class="theme-title">
+              L'économie de la pêche et l'entrepreneuriat aquacole
+            </h3>
+          </div>
+
+          <div class="theme-card animate-on-scroll">
+            <div class="theme-header">
+              <div class="theme-icon">🌱</div>
+              <span class="theme-number">05</span>
+            </div>
+            <h3 class="theme-title">
+              La gestion durable des ressources et des écosystèmes aquatiques
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section class="objectives-section">
+      <div class="objectives-container">
+        <div class="objectives-card animate-on-scroll">
+          <div class="objectives-content">
+            <span class="objectives-icon">🎯</span>
+            <p class="objectives-text">
+              L'objectif est de permettre aux bénéficiaires de <span class="objectives-highlight">mieux maîtriser les déterminants des filières</span>, d'<span class="objectives-highlight">intensifier la production</span> et de <span class="objectives-highlight">préserver durablement les écosystèmes exploités</span>.
+            </p>
+            <div class="objectives-tag">Impact Formation & Développement</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title animate-on-scroll">Participez à Nos Formations</h2>
+        <p class="cta-description animate-on-scroll">Rejoignez nos ateliers thématiques et développez vos compétences en aquaculture durable</p>
+        <div class="cta-buttons">
+          <a href="index.html#contact" class="btn-primary animate-on-scroll">S'inscrire Formation</a>
+          <a href="index.html#projets" class="btn-secondary animate-on-scroll">Calendrier Sessions</a>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Sessions de Formation</h3>
+        <div class="footer-links">
+          <a href="#">Élevage Piscicole</a>
+          <a href="#">Systèmes de Recirculation</a>
+          <a href="#">Transformation Produits</a>
+          <a href="#">Entrepreneuriat Aquacole</a>
+          <a href="#">Gestion Durable</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Modalités</h3>
+        <div class="footer-links">
+          <a href="#">Appels à Participation</a>
+          <a href="#">Calendrier Sessions</a>
+          <a href="#">Inscription Formation</a>
+          <a href="#">Critères Sélection</a>
+          <a href="#">Certificats</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 contact@aquacultureforall.org</p>
+        <p>📱 +225 07 47 05 10 61</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
+    </div>
   </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Staggered animations for theme cards
+    const themeCards = document.querySelectorAll('.theme-card');
+    themeCards.forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.15}s`;
+    });
+
+    // Interactive hover effects for theme cards
+    themeCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.borderTopWidth = '6px';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.borderTopWidth = '4px';
+      });
+    });
+
+    // Theme icons animation
+    const themeIcons = document.querySelectorAll('.theme-icon');
+    themeIcons.forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        icon.style.animation = 'bounce 0.6s ease';
+      });
+      
+      icon.addEventListener('animationend', () => {
+        icon.style.animation = '';
+      });
+    });
+
+    // Add bounce animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes bounce {
+        0%, 20%, 60%, 100% { transform: translateY(0) scale(1); }
+        40% { transform: translateY(-8px) scale(1.1); }
+        80% { transform: translateY(-4px) scale(1.05); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Parallax effect for theme cards
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      
+      // Theme cards parallax
+      themeCards.forEach((card, index) => {
+        const rate = scrolled * 0.002 * (index % 2 === 0 ? 1 : -1);
+        card.style.transform = `translateY(${rate}px)`;
+      });
+    });
+
+    // Intro features animation
+    const introFeatures = document.querySelectorAll('.intro-feature');
+    introFeatures.forEach((feature, index) => {
+      feature.addEventListener('mouseenter', () => {
+        feature.style.transform = 'scale(1.05)';
+        feature.style.background = 'rgba(255, 255, 255, 0.3)';
+      });
+      
+      feature.addEventListener('mouseleave', () => {
+        feature.style.transform = 'scale(1)';
+        feature.style.background = 'rgba(255, 255, 255, 0.2)';
+      });
+    });
+
+    // Process card animation
+    const processCard = document.querySelector('.process-card');
+    if (processCard) {
+      const processObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            entry.target.style.animation = 'slideInUp 0.8s ease 0.3s both';
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      processObserver.observe(processCard);
+    }
+
+    // Add slideInUp animation
+    const slideStyle = document.createElement('style');
+    slideStyle.textContent = `
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(slideStyle);
+
+    // Objectives text animation
+    const objectivesText = document.querySelector('.objectives-text');
+    if (objectivesText) {
+      const objectivesObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            entry.target.style.animation = 'fadeInScale 1s ease 0.5s both';
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      objectivesObserver.observe(objectivesText);
+    }
+
+    // Add fadeInScale animation
+    const fadeStyle = document.createElement('style');
+    fadeStyle.textContent = `
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(fadeStyle);
+
+    // Sequential theme card animation
+    const themeContainer = document.querySelector('.themes-container');
+    if (themeContainer) {
+      const containerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            
+            themeCards.forEach((card, index) => {
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+              }, index * 200);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      
+      containerObserver.observe(themeContainer);
+    }
+  </script>
 </body>
 </html>

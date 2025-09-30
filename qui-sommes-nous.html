@@ -1,147 +1,1125 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qui sommes-nous ? - Aquaculture For All</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fbff;
-      color: #012433;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .navbar a {
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
-      padding: 0.8rem;
     }
-    .section {
-      padding: 7rem 2rem 4rem;
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
       min-height: 100vh;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    h1 {
-      color: #00C0E2;
-      margin-bottom: 1.5rem;
-    }
-    p {
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
-    .photo-haut {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-    }
-    .footer {
-      background: #001A26;
-      color: #ccc;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .header {
-      background: #012433;
+
+    .hero-section {
+      background: var(--gradient-1);
       color: white;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Introduction Section */
+    .intro-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .intro-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 4rem;
       align-items: center;
     }
-    .logo img {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
+
+    .intro-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 2rem;
+      position: relative;
     }
-    .navbar ul {
-      list-style: none;
+
+    .intro-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+    }
+
+    .intro-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .intro-content p:first-of-type {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--primary-blue);
+    }
+
+    .intro-image {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .intro-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .intro-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .intro-overlay h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro-overlay p {
+      opacity: 0.9;
+    }
+
+    /* Values Section */
+    .values-section {
+      padding: 6rem 0;
+      background: var(--light-blue);
+    }
+
+    .values-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .value-card {
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(11, 126, 200, 0.05) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .value-card:hover::before {
+      opacity: 1;
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-1);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .value-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .value-description {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Expertise Section */
+    .expertise-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .expertise-item {
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(11, 126, 200, 0.1);
+    }
+
+    .expertise-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+      background: linear-gradient(135deg, white 0%, var(--light-blue) 100%);
+    }
+
+    .expertise-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .expertise-title {
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .expertise-description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Approach Section */
+    .approach-section {
+      padding: 6rem 0;
+      background: var(--dark-blue);
+      color: white;
+    }
+
+    .approach-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .approach-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 3rem 2rem;
+      border-radius: 25px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .approach-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .approach-icon {
+      width: 100px;
+      height: 100px;
+      background: var(--gradient-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      color: var(--dark-blue);
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .approach-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--secondary-blue);
+    }
+
+    .approach-description {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 6rem 0;
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-description {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
       display: flex;
       gap: 1.5rem;
-      padding: 0;
-      margin: 0;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .navbar a {
-      color: white;
+
+    .btn-primary {
+      background: white;
+      color: var(--primary-blue);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
       text-decoration: none;
-      padding: 0.8rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .intro-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .intro-image {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .intro-section,
+      .values-section,
+      .expertise-section,
+      .approach-section,
+      .cta-section {
+        padding: 4rem 0;
+      }
+
+      .intro-container,
+      .values-container,
+      .approach-container,
+      .cta-container {
+        padding: 0 1rem;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .values-grid,
+      .expertise-grid,
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-image img {
+        height: 300px;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo-afa.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </a>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="index.html#mission" class="nav-link">Mission</a></li>
+          <li class="nav-item"><a href="index.html#projets" class="nav-link">Projets</a></li>
+          <li class="nav-item"><a href="index.html#impact" class="nav-link">Impact</a></li>
+          <li class="nav-item"><a href="index.html#equipe" class="nav-link">Équipe</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </div>
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html#hero">Accueil</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="index.html#projets">Projets</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <img src="./assets/images/afa_group.jpg" alt="Photo de groupe AFA" class="photo-haut" />
-      <h1>Qui sommes-nous ?</h1>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="breadcrumb animate-on-scroll">
+          🏠 Accueil → Qui sommes-nous ?
+        </div>
+        <h1 class="hero-title animate-on-scroll">Qui sommes-nous ?</h1>
+        <p class="hero-subtitle animate-on-scroll">Une organisation engagée pour une aquaculture responsable, inclusive et accessible à tous</p>
+      </div>
+    </section>
 
-      <p>
-        L’ONG Aquaculture For All (AFA) est une organisation à but non lucratif fondée par des experts en aquaculture, pêche, agriculture, environnement et développement durable. Elle est née d’un engagement commun pour promouvoir une aquaculture responsable, inclusive et accessible à tous.
-      </p>
-      <p>
-        L’ONG AFA regroupe une diversité de compétences issues d’universitaires, de chercheurs, d’ingénieurs, de techniciens et de praticiens, tous engagés dans le développement de solutions concrètes pour relever les défis liés à la sécurité alimentaire, l’emploi des jeunes, et l’autonomisation des femmes par l’aquaculture.
-      </p>
-      <p>
-        Elle vise à structurer les initiatives existantes, renforcer les capacités des acteurs, accompagner les projets locaux, et sensibiliser les communautés rurales et urbaines aux enjeux de la gestion durable des ressources aquatiques.
-      </p>
-      <p>
-        L’approche d’AFA repose sur la collaboration avec les institutions, les partenaires techniques et financiers, les collectivités et les populations bénéficiaires afin de bâtir une filière aquacole forte, moderne et équitable.
-      </p>
-    </div>
+    <!-- Introduction Section -->
+    <section class="intro-section">
+      <div class="intro-container">
+        <div class="intro-content animate-on-scroll">
+          <h2>Notre Organisation</h2>
+          <p>L'ONG Aquaculture For All (AFA) est une organisation à but non lucratif fondée par des experts en aquaculture, pêche, agriculture, environnement et développement durable.</p>
+          <p>Elle est née d'un engagement commun pour promouvoir une aquaculture responsable, inclusive et accessible à tous.</p>
+          <p>L'ONG AFA regroupe une diversité de compétences issues d'universitaires, de chercheurs, d'ingénieurs, de techniciens et de praticiens, tous engagés dans le développement de solutions concrètes pour relever les défis liés à la sécurité alimentaire, l'emploi des jeunes, et l'autonomisation des femmes par l'aquaculture.</p>
+        </div>
+        
+        <div class="intro-image animate-on-scroll">
+          <img src="./assets/images/afa_group.jpg" alt="Équipe AFA">
+          <div class="intro-overlay">
+            <h3>Notre équipe diverse</h3>
+            <p>Experts unis pour l'aquaculture durable</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+      <div class="values-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Nos Valeurs</div>
+          <h2 class="section-title">Ce qui nous guide</h2>
+          <p class="section-subtitle">Des principes fondamentaux qui orientent toutes nos actions et initiatives</p>
+        </div>
+        
+        <div class="values-grid">
+          <div class="value-card animate-on-scroll">
+            <div class="value-icon">🌱</div>
+            <h3 class="value-title">Durabilité</h3>
+            <p class="value-description">Nous promouvons des pratiques aquacoles respectueuses de l'environnement et des écosystèmes aquatiques.</p>
+          </div>
+          
+          <div class="value-card animate-on-scroll">
+            <div class="value-icon">🤝</div>
+            <h3 class="value-title">Inclusivité</h3>
+            <p class="value-description">Notre approche met l'accent sur l'égalité des genres et l'autonomisation des communautés vulnérables.</p>
+          </div>
+          
+          <div class="value-card animate-on-scroll">
+            <div class="value-icon">🔬</div>
+            <h3 class="value-title">Innovation</h3>
+            <p class="value-description">Nous développons des solutions techniques adaptées aux défis locaux et au changement climatique.</p>
+          </div>
+          
+          <div class="value-card animate-on-scroll">
+            <div class="value-icon">🎓</div>
+            <h3 class="value-title">Formation</h3>
+            <p class="value-description">Nous transmettons les connaissances et renforçons les capacités des acteurs de terrain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise-section">
+      <div class="values-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge">Notre Expertise</div>
+          <h2 class="section-title">Domaines de compétences</h2>
+          <p class="section-subtitle">Une équipe multidisciplinaire avec des expertises complémentaires</p>
+        </div>
+        
+        <div class="expertise-grid">
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🐟</span>
+            <h4 class="expertise-title">Aquaculture</h4>
+            <p class="expertise-description">Techniques de pisciculture moderne et traditionnelle</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🎣</span>
+            <h4 class="expertise-title">Pêche</h4>
+            <p class="expertise-description">Gestion durable des ressources halieutiques</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🌾</span>
+            <h4 class="expertise-title">Agriculture</h4>
+            <p class="expertise-description">Systèmes intégrés aquaculture-agriculture</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">🌍</span>
+            <h4 class="expertise-title">Environnement</h4>
+            <p class="expertise-description">Protection des écosystèmes aquatiques</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">💡</span>
+            <h4 class="expertise-title">Développement</h4>
+            <p class="expertise-description">Stratégies de développement durable</p>
+          </div>
+          
+          <div class="expertise-item animate-on-scroll">
+            <span class="expertise-emoji">📊</span>
+            <h4 class="expertise-title">Recherche</h4>
+            <p class="expertise-description">Innovation et recherche appliquée</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section class="approach-section">
+      <div class="approach-container">
+        <div class="section-header animate-on-scroll">
+          <div class="section-badge" style="background: rgba(255, 255, 255, 0.2);">Notre Approche</div>
+          <h2 class="section-title" style="color: white;">Comment nous procédons</h2>
+          <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Une méthodologie collaborative et participative pour un impact durable</p>
+        </div>
+        
+        <div class="approach-grid">
+          <div class="approach-card animate-on-scroll">
+            <div class="approach-icon">1</div>
+            <h3 class="approach-title">Structurer</h3>
+            <p class="approach-description">Nous structurons les initiatives existantes et créons des synergies entre les acteurs du secteur.</p>
+          </div>
+          
+          <div class="approach-card animate-on-scroll">
+            <div class="approach-icon">2</div>
+            <h3 class="approach-title">Renforcer</h3>
+            <p class="approach-description">Nous renforçons les capacités des acteurs locaux par la formation et l'accompagnement technique.</p>
+          </div>
+          
+          <div class="approach-card animate-on-scroll">
+            <div class="approach-icon">3</div>
+            <h3 class="approach-title">Accompagner</h3>
+            <p class="approach-description">Nous accompagnons les projets locaux depuis leur conception jusqu'à leur mise en œuvre.</p>
+          </div>
+          
+          <div class="approach-card animate-on-scroll">
+            <div class="approach-icon">4</div>
+            <h3 class="approach-title">Sensibiliser</h3>
+            <p class="approach-description">Nous sensibilisons les communautés aux enjeux de gestion durable des ressources aquatiques.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-container">
+        <h2 class="cta-title animate-on-scroll">Rejoignez notre mission</h2>
+        <p class="cta-description animate-on-scroll">Ensemble, bâtissons une filière aquacole forte, moderne et équitable pour l'Afrique de l'Ouest</p>
+        <div class="cta-buttons">
+          <a href="index.html#contact" class="btn-primary animate-on-scroll">Nous contacter</a>
+          <a href="index.html#projets" class="btn-secondary animate-on-scroll">Découvrir nos projets</a>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Qui sommes-nous ?</h3>
+        <div class="footer-links">
+          <a href="mot-du-president.html">Le mot du président</a>
+          <a href="#">Notre équipe</a>
+          <a href="#">Nos valeurs</a>
+          <a href="#">Notre approche</a>
+          <a href="#">Nos partenaires</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Nos domaines</h3>
+        <div class="footer-links">
+          <a href="#">Aquaculture</a>
+          <a href="#">Pêche durable</a>
+          <a href="#">Formation</a>
+          <a href="#">Recherche & Innovation</a>
+          <a href="#">Autonomisation femmes</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 contact@aquacultureforall.org</p>
+        <p>📱 +225 07 47 05 10 61</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroSection = document.querySelector('.hero-section');
+      if (heroSection) {
+        const rate = scrolled * 0.5;
+        heroSection.style.backgroundPosition = `center ${rate}px`;
+      }
+    });
+
+    // Staggered animations for grid items
+    const grids = document.querySelectorAll('.values-grid, .expertise-grid, .approach-grid');
+    grids.forEach(grid => {
+      const items = grid.querySelectorAll('.animate-on-scroll');
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
 </body>
 </html>

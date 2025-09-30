@@ -1,156 +1,899 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Le Mot du Président - Aquaculture For All</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fbff;
-      color: #012433;
+    :root {
+      --primary-blue: #0B7EC8;
+      --secondary-blue: #87CEEB;
+      --accent-aqua: #00D4E6;
+      --dark-blue: #032B43;
+      --light-blue: #E8F4F8;
+      --white: #FFFFFF;
+      --text-dark: #1A202C;
+      --text-light: #718096;
+      --gradient-1: linear-gradient(135deg, #0B7EC8 0%, #00D4E6 100%);
+      --gradient-2: linear-gradient(135deg, #87CEEB 0%, #00D4E6 100%);
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--light-blue) 0%, white 100%);
+    }
+
+    /* Header Ultra Moderne */
     .header {
-      background: #012433;
-      color: white;
-      padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(11, 126, 200, 0.1);
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0.5rem 0;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .navbar ul {
-      list-style: none;
+
+    .logo {
       display: flex;
-      gap: 1.5rem;
-      padding: 0;
-      margin: 0;
-    }
-    .navbar a {
-      color: white;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.3s ease;
       text-decoration: none;
-      padding: 0.8rem;
     }
-    .section {
-      padding: 7rem 2rem 4rem;
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+
+    .nav-link:hover::before {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-blue);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding-top: 120px;
       min-height: 100vh;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    h1 {
-      color: #00C0E2;
-      margin-bottom: 2rem;
-    }
-    p {
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
-    .president-photo {
-      display: block;
-      max-width: 220px;
-      margin: 0 auto 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-    .footer {
-      background: #001A26;
-      color: #ccc;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .header {
-      background: #012433;
+
+    .hero-section {
+      background: var(--gradient-1);
       color: white;
-      padding: 1rem 2rem;
-      position: fixed;
-      width: 100%;
+      padding: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
       top: 0;
       left: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px, 80px 80px;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
     }
-    .logo img {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
     }
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      padding: 0;
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 6rem 0;
+      background: white;
+    }
+
+    .content-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .president-card {
+      background: white;
+      border-radius: 25px;
+      padding: 2rem;
+      box-shadow: var(--shadow-medium);
+      text-align: center;
+      position: sticky;
+      top: 140px;
+      transition: all 0.3s ease;
+    }
+
+    .president-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .president-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-blue);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .president-photo:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-aqua);
+    }
+
+    .president-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .president-title {
+      color: var(--primary-blue);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .president-credentials {
+      background: var(--light-blue);
+      padding: 1rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .president-credentials strong {
+      color: var(--primary-blue);
+    }
+
+    /* Message Content */
+    .message-content {
+      background: var(--light-blue);
+      border-radius: 25px;
+      padding: 3rem;
+      box-shadow: var(--shadow-light);
+    }
+
+    .message-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-blue);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .message-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+    }
+
+    .message-content p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-dark);
+    }
+
+    .message-content p:first-of-type {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--primary-blue);
+    }
+
+    .quote-highlight {
+      background: white;
+      border-left: 4px solid var(--primary-blue);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 15px 15px 0;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--primary-blue);
+      box-shadow: var(--shadow-light);
+    }
+
+    .signature {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-top: 3rem;
+      text-align: right;
+      box-shadow: var(--shadow-light);
+      border-top: 3px solid var(--primary-blue);
+    }
+
+    .signature p {
       margin: 0;
+      font-style: italic;
+      color: var(--text-dark);
     }
-    .navbar a {
+
+    .signature strong {
+      color: var(--primary-blue);
+      font-size: 1.1rem;
+    }
+
+    /* Statistics Cards */
+    .stats-section {
+      background: var(--dark-blue);
       color: white;
+      padding: 4rem 0;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      display: block;
+      color: var(--secondary-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--dark-blue);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--secondary-blue);
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
-      padding: 0.8rem;
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--secondary-blue);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      background: var(--secondary-blue);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .content-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .president-card {
+        position: static;
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: var(--shadow-medium);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .content-section {
+        padding: 4rem 0;
+      }
+
+      .message-content {
+        padding: 2rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .header-container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-container,
+      .content-container {
+        padding: 0 1rem;
+      }
+
+      .message-content {
+        padding: 1.5rem;
+      }
+
+      .president-card {
+        padding: 1.5rem;
+      }
+
+      .president-photo {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="./assets/images/logo-afa.png" alt="Aquaculture For All">
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo-afa.png" alt="AFA Logo">
+        <span class="logo-text">Aquaculture For All</span>
+      </a>
+      
+      <nav class="navbar">
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+          <li class="nav-item"><a href="index.html#mission" class="nav-link">Mission</a></li>
+          <li class="nav-item"><a href="index.html#projets" class="nav-link">Projets</a></li>
+          <li class="nav-item"><a href="index.html#impact" class="nav-link">Impact</a></li>
+          <li class="nav-item"><a href="index.html#equipe" class="nav-link">Équipe</a></li>
+          <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
     </div>
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html#hero">Accueil</a></li>
-        <li><a href="index.html#mission">Mission</a></li>
-        <li><a href="index.html#equipe">Équipe</a></li>
-        <li><a href="index.html#projets">Projets</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main class="section">
-    <div class="container">
-      <img src="./assets/images/AFA_President.png" alt="Président de l'ONG AFA" class="president-photo" />
-      <h1>Le Mot du Président</h1>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="breadcrumb animate-on-scroll">
+          🏠 Accueil → Le Mot du Président
+        </div>
+        <h1 class="hero-title animate-on-scroll">Le Mot du Président</h1>
+        <p class="hero-subtitle animate-on-scroll">Un message d'engagement pour l'aquaculture durable et l'autonomisation des communautés africaines</p>
+      </div>
+    </section>
 
-      <p>L’aquaculture contribue de façon significative à la sécurité alimentaire et nutritionnelle et à la croissance économique en Afrique, notamment pour les ménages pauvres. De même, l’aquaculture est en train de se transformer en une industrie susceptible de contribuer fortement au développement des pays africains, même si ce secteur est encore émergent...</p>
+    <!-- Content Section -->
+    <section class="content-section">
+      <div class="content-container">
+        <!-- President Card -->
+        <div class="president-card animate-on-scroll">
+          <img src="./assets/images/AFA_President.png" alt="Dr. Da Costa K. Sebastino" class="president-photo">
+          <div class="president-info">
+            <h3>Dr. Da Costa K. Sebastino</h3>
+            <p class="president-title">Président & Fondateur</p>
+            <div class="president-credentials">
+              <strong>Professeur Ichtyologiste Pisciculteur</strong><br>
+              Directeur de Recherche<br>
+              Expert en Aquaculture Durable<br>
+              <br>
+              <strong>+15 ans d'expérience</strong> dans le développement de l'aquaculture en Afrique de l'Ouest
+            </div>
+          </div>
+        </div>
 
-      <p>L’étude du potentiel aquacole en Afrique réalisée par Kaunda et Chimatiro (2015) montre clairement qu’il est urgent d’accélérer le développement de cette filière sur notre continent où la croissance annuelle de la population (2,45 %) est généralement bien supérieure à la moyenne mondiale (1,16 %)...</p>
+        <!-- Message Content -->
+        <div class="message-content animate-on-scroll">
+          <h2>Vision pour l'Aquaculture Africaine</h2>
+          
+          <p>L'aquaculture contribue de façon significative à la sécurité alimentaire et nutritionnelle et à la croissance économique en Afrique, notamment pour les ménages pauvres. De même, l'aquaculture est en train de se transformer en une industrie susceptible de contribuer fortement au développement des pays africains, même si ce secteur est encore émergent...</p>
 
-      <p>Malgré ces atouts socio-démographiques et économiques, la production aquacole reste limitée. Pourtant l’Afrique dispose de capacités en ressources humaines, de terres suffisantes, d’un environnement aquatique adapté tant en eaux continentales, saumâtres que côtières...</p>
+          <p>L'étude du potentiel aquacole en Afrique réalisée par Kaunda et Chimatiro (2015) montre clairement qu'il est urgent d'accélérer le développement de cette filière sur notre continent où la croissance annuelle de la population (2,45 %) est généralement bien supérieure à la moyenne mondiale (1,16 %)...</p>
 
-      <p>Globalement, la pêche et l’aquaculture occupe sur le continent près de 12,3 millions de personnes représentant 2,1 % de la population africaine dont 7,5 % travaillent dans l’aquaculture. Environ 27,3 % sont des femmes, notamment dans la transformation (58 %)...</p>
+          <div class="quote-highlight">
+            "L'Afrique dispose de capacités en ressources humaines, de terres suffisantes, d'un environnement aquatique adapté tant en eaux continentales, saumâtres que côtières"
+          </div>
 
-      <p>L’ONG « Aquaculture For All » (AFA) souhaite apporter sa contribution à travers l’information, la formation, la sensibilisation, et la promotion de solutions techniques adaptées à tous les environnements. L’accent est mis sur les femmes, qui peuvent jouer un rôle clé dans cette dynamique...</p>
+          <p>Malgré ces atouts socio-démographiques et économiques, la production aquacole reste limitée. Pourtant l'Afrique dispose de capacités en ressources humaines, de terres suffisantes, d'un environnement aquatique adapté tant en eaux continentales, saumâtres que côtières...</p>
 
-      <p>Nous lançons un appel à toutes les bonnes volontés, institutions, techniciens, bailleurs et agences pour accompagner cette initiative afin de renforcer la production aquacole et l’autonomisation des femmes en Côte d’Ivoire et au-delà.</p>
+          <p>Globalement, la pêche et l'aquaculture occupe sur le continent près de 12,3 millions de personnes représentant 2,1 % de la population africaine dont 7,5 % travaillent dans l'aquaculture. Environ 27,3 % sont des femmes, notamment dans la transformation (58 %)...</p>
 
-      <p><strong>Ensemble, nous le pouvons.</strong></p>
+          <p>L'ONG « Aquaculture For All » (AFA) souhaite apporter sa contribution à travers l'information, la formation, la sensibilisation, et la promotion de solutions techniques adaptées à tous les environnements. L'accent est mis sur les femmes, qui peuvent jouer un rôle clé dans cette dynamique...</p>
 
-      <br><br>
-      <p style="font-style: italic; text-align: right;">
-        <strong>Dr Da Costa Kouassi Sébastino (Prof.)</strong><br>
-        Ichtyologiste Pisciculteur<br>
-        Directeur de Recherche<br>
-        Président de l’ONG AFA
-      </p>
-    </div>
+          <p>Nous lançons un appel à toutes les bonnes volontés, institutions, techniciens, bailleurs et agences pour accompagner cette initiative afin de renforcer la production aquacole et l'autonomisation des femmes en Côte d'Ivoire et au-delà.</p>
+
+          <div class="quote-highlight">
+            "Ensemble, nous le pouvons."
+          </div>
+
+          <div class="signature">
+            <p>
+              <strong>Dr Da Costa Kouassi Sébastino (Prof.)</strong><br>
+              Ichtyologiste Pisciculteur<br>
+              Directeur de Recherche<br>
+              Président de l'ONG AFA
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">12.3M</span>
+          <span class="stat-label">Personnes employées en Afrique dans la pêche et l'aquaculture</span>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">27.3%</span>
+          <span class="stat-label">De femmes dans le secteur, notamment dans la transformation</span>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">2.45%</span>
+          <span class="stat-label">Croissance annuelle de la population africaine</span>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <span class="stat-number">58%</span>
+          <span class="stat-label">De femmes dans la transformation du poisson</span>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Aquaculture For All. Tous droits réservés.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Aquaculture For All</h3>
+        <p>ONG dédiée au développement de l'aquaculture durable et à l'autonomisation des communautés en Afrique de l'Ouest.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">📘</a>
+          <a href="#" class="social-link">🐦</a>
+          <a href="#" class="social-link">💼</a>
+          <a href="#" class="social-link">📸</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Liens rapides</h3>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="index.html#mission">Notre mission</a>
+          <a href="index.html#projets">Nos projets</a>
+          <a href="index.html#impact">Notre impact</a>
+          <a href="index.html#equipe">Notre équipe</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Président</h3>
+        <div class="footer-links">
+          <a href="#">Le mot du président</a>
+          <a href="#">Biographie</a>
+          <a href="#">Publications</a>
+          <a href="#">Conférences</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 contact@aquacultureforall.org</p>
+        <p>📱 +225 07 47 05 10 61</p>
+        <p>📍 Abidjan, Côte d'Ivoire</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Aquaculture For All. Tous droits réservés. | Politique de confidentialité | Mentions légales</p>
     </div>
   </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Add loading animation to page
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease';
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Counter animation for stats
+    function animateCounter(element, target) {
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        
+        const suffix = element.dataset.suffix || '';
+        if (suffix === '%') {
+          element.textContent = Math.floor(current) + '%';
+        } else if (suffix === 'M') {
+          element.textContent = (current / 1000000).toFixed(1) + 'M';
+        } else {
+          element.textContent = Math.floor(current).toLocaleString() + suffix;
+        }
+      }, 16);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          const text = entry.target.textContent;
+          let number;
+          let suffix = '';
+          
+          if (text.includes('M')) {
+            number = parseFloat(text) * 1000000;
+            suffix = 'M';
+          } else if (text.includes('%')) {
+            number = parseFloat(text);
+            suffix = '%';
+          } else {
+            number = parseFloat(text);
+          }
+          
+          entry.target.dataset.suffix = suffix;
+          entry.target.dataset.animated = 'true';
+          animateCounter(entry.target, number);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(num => statsObserver.observe(num));
+  </script>
 </body>
 </html>
